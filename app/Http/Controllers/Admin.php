@@ -14,7 +14,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\View;
 
 class Admin extends Controller
 {
@@ -92,6 +92,25 @@ class Admin extends Controller
         }
         $data['kategori'] = Kategori::all();
         return view('pages.pos.index', $data);
+    }
+
+    public function posKategori($kategori)
+    {
+        if ($kategori == "all") {
+            $data['menu'] = Menu::all();
+            $data['nama_kategori'] = '';
+        } else {
+            $namaKategori = lineToSpace($kategori);
+            $_kategori = Kategori::where('nama_kategori', $namaKategori)->first();
+            $idKategori = $_kategori->id_kategori;
+            $data['nama_kategori'] = $namaKategori;
+            $data['menu'] = Menu::where('id_kategori', $idKategori)->get();
+        }
+        $html = View::make('pages.pos.kategori', $data)->render();
+
+        return response()->json([
+            'html' => $html,
+        ]);
     }
 
     public function kategori($idKategori = null)

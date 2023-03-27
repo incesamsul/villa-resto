@@ -76,7 +76,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:Administrator']], function () {
         Route::get('/check_in', [Admin::class, 'checkIn']);
         Route::get('/check_in/{id_kamar}', [Admin::class, 'checkIn']);
         Route::get('/pos', [Admin::class, 'pos']);
-        Route::get('/pos/kategori/{kategori}', [Admin::class, 'pos']);
+        Route::get('/pos/kategori/{kategori}', [Admin::class, 'posKategori']);
         Route::get('/kategori', [Admin::class, 'kategori']);
         Route::get('/kategori/{id_kategori}', [Admin::class, 'kategori']);
         Route::get('/menu', [Admin::class, 'menu']);

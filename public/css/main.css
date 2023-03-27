@@ -45,6 +45,8 @@ body {
 }
 
 
+
+
 .tagihan-menu-wrapper .img-wrapper img {
     width: 100%;
     height: 100%;
@@ -77,24 +79,6 @@ body {
     overflow-y: auto;
 }
 
-.list-kategori::-webkit-scrollbar {
-    width: 4px;
-    height: 4px;
-}
-
-.list-kategori::-webkit-scrollbar-thumb {
-    background-color: #F9F9FB;
-    border-radius: 4px;
-}
-
-.list-kategori:hover::-webkit-scrollbar-thumb {
-    background-color: #eee !important;
-}
-
-.list-kategori:hover::-webkit-scrollbar {
-    display: block;
-}
-
 .fixed-element {
     position: fixed !important;
     /* right: 0; */
@@ -103,6 +87,31 @@ body {
     height: 100vh;
     z-index: 999;
 }
+
+.list-kategori::-webkit-scrollbar,
+.card#tagihan::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+.list-kategori::-webkit-scrollbar-thumb,
+.card#tagihan::-webkit-scrollbar-thumb {
+    background-color: #F9F9FB;
+    border-radius: 4px;
+}
+
+.list-kategori:hover::-webkit-scrollbar-thumb,
+.card#tagihan:hover::-webkit-scrollbar-thumb {
+    background-color: #eee !important;
+}
+
+.list-kategori:hover::-webkit-scrollbar,
+.card#tagihan:hover::-webkit-scrollbar {
+    display: block;
+}
+
+
+
 
 .main-wrapper {
     background-color: #F9F9FB !important;
@@ -146,7 +155,11 @@ h6 {
 }
 
 .bg-main:hover {
-    background-color: #704234 !important;
+    background-color: #8a5141 !important;
+}
+
+.bg-main:focus {
+    background-color: #8a5141 !important;
 }
 
 textarea {
