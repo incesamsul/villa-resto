@@ -26,6 +26,7 @@
                                         style="cursor: pointer">ID <span id="id_icon"></span></th>
                                     <td>Nama</td>
                                     <td>Email</td>
+                                    <td>Nomor wa</td>
                                     <td>Tipe Pengguna</td>
                                     <td></td>
                                 </tr>
@@ -98,6 +99,10 @@
                                 <option>owner</option>
                                 <option>Administrator</option>
                             </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="wa">Nomor whatsapp</label>
+                            <input type="text" class="form-control" name="wa" id="wa">
                         </div>
                 </div>
                 <div class="modal-footer">
@@ -205,6 +210,7 @@
                 let dataPengguna = $(this).data('pengguna');
                 $('#nama').val(dataPengguna.name);
                 $('#email').val(dataPengguna.email);
+                $('#wa').val(dataPengguna.wa);
                 $('#tipe-pengguna').val(dataPengguna.role);
                 $('#id').val(dataPengguna.id);
                 $('#ModalLabel').html('Ubah Pengguna');
