@@ -615,6 +615,7 @@ class Admin extends Controller
         User::create([
             'name' => $request->nama,
             'email' => $request->email,
+            'wa' => $request->wa,
             'password' => bcrypt($request->email),
             'role' => $request->tipe_pengguna,
         ]);
@@ -629,6 +630,7 @@ class Admin extends Controller
         $user->update([
             'name' => $request->nama,
             'email' => $request->email,
+            'wa' => $request->wa,
             'role' => $request->tipe_pengguna,
         ]);
         return redirect('/admin/pengguna')->with('message', 'Pengguna Berhasil di update');

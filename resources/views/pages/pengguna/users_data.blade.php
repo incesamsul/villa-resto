@@ -1,23 +1,25 @@
-
 @foreach ($pengguna as $p)
-<tr>
-    <td>{{ $loop->iteration }}</td>
-    <td>{{ $p->name }}</td>
-    <td>{{ $p->email }}</td>
-    <td>{{ $p->role }}</td>
-    <td class="option">
-        <div class="btn-group dropleft btn-option">
-            <i type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-ellipsis-v"></i>
-            </i>
-            <div class="dropdown-menu">
-                {{-- <a data-pengguna='@json($p)' data-toggle="modal" data-target="#modalPengguna" class="dropdown-item kaitkan" href="#"><i class="fas fa-link"> Kaitkan data</i></a> --}}
-                <a data-pengguna='@json($p)' data-toggle="modal" data-target="#modalPengguna" class="dropdown-item edit" href="#"><i class="fas fa-pen"> Edit</i></a>
-                <a data-id_pengguna="{{ $p->id }}" class="dropdown-item hapus" href="#"><i class="fas fa-trash"> Hapus</i></a>
+    <tr>
+        <td>{{ $loop->iteration }}</td>
+        <td>{{ $p->name }}</td>
+        <td>{{ $p->email }}</td>
+        <td>{{ $p->wa }}</td>
+        <td>{{ $p->role }}</td>
+        <td class="option">
+            <div class="btn-group dropleft btn-option">
+                <i type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-ellipsis-v"></i>
+                </i>
+                <div class="dropdown-menu">
+                    {{-- <a data-pengguna='@json($p)' data-toggle="modal" data-target="#modalPengguna" class="dropdown-item kaitkan" href="#"><i class="fas fa-link"> Kaitkan data</i></a> --}}
+                    <a data-pengguna='@json($p)' data-toggle="modal" data-target="#modalPengguna"
+                        class="dropdown-item edit" href="#"><i class="fas fa-pen"> Edit</i></a>
+                    <a data-id_pengguna="{{ $p->id }}" class="dropdown-item hapus" href="#"><i
+                            class="fas fa-trash"> Hapus</i></a>
+                </div>
             </div>
-        </div>
-    </td>
-</tr>
+        </td>
+    </tr>
 @endforeach
 <tr class="no-hover">
     <td colspan="5" class="text-center">
