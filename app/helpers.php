@@ -21,7 +21,7 @@ function sendWhatsAppMessage($wa, $pesan)
 {
     $_wa = convertNoHp($wa);
     $account_sid = 'AC80c49cc0f6ee0b7b01a332c886df472a';
-    $auth_token = 'aaec5a7bccb137143f78f873abaa40c5';
+    $auth_token = '4e1a8dd7efdaccf38ee53a9d71f3ad07';
     $twilio_whatsapp_number = 'whatsapp:+14155238886';
 
     $client = new Client($account_sid, $auth_token);

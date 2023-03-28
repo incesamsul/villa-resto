@@ -42,7 +42,7 @@ class LupaKataSandiController extends Controller
             'token' => $kodeReset
         ]);
 
-        $resetLink = 'ini adalah link lupa password anda, jangan bagikan link ini kepada siapapun http://testapp.samtam.tech/reset-password/' . $kodeReset;
+        $resetLink = 'ini adalah link lupa password anda, jangan bagikan link ini kepada siapapun https://testapp.samtam.tech/reset-password/' . $kodeReset;
         sendWhatsAppMessage($user->wa, $resetLink);
         return redirect('lupa-kata-sandi/200');
     }
