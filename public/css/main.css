@@ -69,10 +69,6 @@ body {
     object-fit: cover;
 }
 
-* {
-    transition: all 1s !important;
-}
-
 .card#tagihan {
     width: 330px;
     transition: .5s;

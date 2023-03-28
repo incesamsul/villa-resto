@@ -106,6 +106,7 @@ class Admin extends Controller
             $data['nama_kategori'] = $namaKategori;
             $data['menu'] = Menu::where('id_kategori', $idKategori)->get();
         }
+        $data['kategori'] = Kategori::all();
         $html = View::make('pages.pos.kategori', $data)->render();
 
         return response()->json([

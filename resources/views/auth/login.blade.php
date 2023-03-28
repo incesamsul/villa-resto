@@ -28,22 +28,24 @@
         <div class="container-fluid login-wrapper ">
             <div class="row login-row">
                 <div class="col-md-4 login-sec ">
-                    <h2 class="text-center mt-5">Pemetaan Wisata</h2>
+                    <h2>Villa & Resto</h2>
+                    <p class="text-secondary mb-5"><small>login untuk mulai menggunakan aplikasi</small></p>
                     @if (session('fail'))
-                        <p class="text-danger">{{ session('fail') }}</p>
+                        <p class="text-danger"><small>{{ session('fail') }}</small></p>
                     @endif
                     <form action="{{ URL::to('/postlogin') }}" method="post">
                         @csrf
-                        <div class="form-group">
+                        <div class="form-group text-secondary">
                             <i class="fa fa-user" style="font-size: 12px"></i>
-                            <label for="email" class="text-uppercase">Email</label>
-                            <input name="email" type="text" class="form-control" placeholder="Masukkan email anda">
+                            <label for="email" class="text-uppercase "><strong>Email</strong></label>
+                            <input name="email" type="text" class="form-control border-0"
+                                placeholder="Masukkan email anda">
 
                         </div>
-                        <div class="form-group">
+                        <div class="form-group text-secondary">
                             <i class="fa fa-key" style="font-size: 12px"></i>
-                            <label for="password" class="text-uppercase">Password</label>
-                            <input name="password" type="password" class="form-control"
+                            <label for="password" class="text-uppercase"><strong>Password</strong></label>
+                            <input name="password" type="password" class="form-control border-0"
                                 placeholder="Masukkan password anda">
                         </div>
                         <a href="#" class="forgot"><u> Forgot Your Password?</u></a>
@@ -51,34 +53,11 @@
                     </form>
                     <div class="copy-text">Copyright © 2022 ♦ Pemetaan Toraja.</div>
                 </div>
-                <div class="col-md-8 banner-sec">
-                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel"
-                        style="width: 750px">
-                        <ol class="carousel-indicators">
-                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                        </ol>
-                        <div class="carousel-inner" role="listbox">
-                            <div class="carousel-item active">
-                                <img class="d-block img-fluid" src="{{ asset('img/home/toraja.jpg') }}"
-                                    alt="First slide" style="max-width:100%">
-                                <div class="carousel-caption d-none d-md-block">
-
-                                </div>
-                            </div>
-                            <?php for ($i = 2; $i <= 3; $i++) : ?>
-                            <div class="carousel-item">
-                                <img class="d-block img-fluid" src="{{ asset('img/home/toraja.jpg') }}"
-                                    style="max-width:100%">
-                                <div class="carousel-caption d-none d-md-block">
-
-                                </div>
-                            </div>
-                            <?php endfor; ?>
-
-                        </div>
-                    </div>
+                <div class="col-md-8 banner-sec d-flex flex-column text-center">
+                    <img src="{{ asset('img/login_img/login.png') }}" alt="" width="400">
+                    <p class="text-secondary"><strong>Villa & Resto</strong></p>
+                    <small class="px-5 text-secondary">Selamat datang di aplikasi pemantauan villa dan resto! Kami
+                        senang Anda sudah bergabung bersama kami. Silakan login untuk melanjutkan.</small>
                 </div>
             </div>
     </section>

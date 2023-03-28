@@ -32,7 +32,7 @@
                             </div>
                         @endforeach
                     </div>
-                    <div id="menu-wrapper" class="text-center">
+                    <div id="menu-wrapper">
                         <div class="row mt-4">
                             <div class="col-sm-12 d-flex justify-content-between align-items-end">
                                 <h4>Semua Menu {!! $nama_kategori ? $nama_kategori . '<a href="../" class="ml-4 badge badge-secondary">all</a>' : '' !!}</h4>
@@ -113,6 +113,11 @@
 
             $(document).on('click', '.btn-kategori', function(e) {
                 e.preventDefault();
+                var $this = $(this).children();
+                if (!$this.hasClass('active')) {
+                    $('.card.active').removeClass('active');
+                    $this.addClass('active');
+                }
                 let namaKategori = $(this).data('nama_kategori');
                 console.log(namaKategori);
                 $.ajax({
@@ -129,8 +134,9 @@
                     },
                     beforeSend: function() {
                         let loadingAsset = $('#loading-asset').data('asset_url');
-                        $('#menu-wrapper').html('<img class="mt-5 pt-5" src="' + loadingAsset +
-                            '" width="100"><p class="pt-5 pt-5">Loading...</p>');
+                        $('#menu-wrapper').html('<img class="mt-5 pt-5 " src="' +
+                            loadingAsset +
+                            '" width="100"><p class="pt-5 pt-5 ">Loading...</p>');
                     },
                     complete: function() {}
                 })

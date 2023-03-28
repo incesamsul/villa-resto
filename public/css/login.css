@@ -3,37 +3,46 @@ body {
     height: 100vh;
     justify-content: center;
     align-items: center;
-    background: #EA1350;
+    background: #fff;
     /* fallback for old browsers */
-    background: -webkit-linear-gradient(to bottom, #95193c, #EA1350);
+    background: -webkit-linear-gradient(to bottom, #fff, #fff);
     /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to bottom, #95193c, #EA1350);
+    background: linear-gradient(to bottom, #fff, #fff);
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 .login-block {
     float: left;
     width: 100%;
-    height: 635px;
-    padding: 40px 0;
+    height: 100vh;
+    /* padding: 40px 0; */
 }
 
 .form-control:focus {
-    border-color: #95193c;
+    border-color: #9F6162;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 140, 255, 0.6);
 }
 
 .login-wrapper {
-    width: 1140px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 15px 20px 0px rgba(0, 0, 0, 0.1);
+    background-color: #f3f3f3;
+    width: 100vw;
+    height: 100%;
     overflow: hidden;
 }
 
-.carousel-inner {
-    border-radius: 0 10px 10px 0;
+.login-wrapper input {
+    padding: 10px;
+    border-radius: 10px;
 }
+
+.login-wrapper input::placeholder {
+    color: #bbb;
+    font-size: 12px;
+}
+
+.login-wrapper label {}
 
 .carousel-caption {
     text-align: left;
@@ -43,16 +52,22 @@ body {
 .login-sec {
     padding: 30px 30px;
     position: relative;
-    min-height: 550px
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: center; */
 }
 
 .banner-sec {
-    min-height: 550px;
+    background-color: #70413218;
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.carousel-item img {
-    min-height: 550px;
-}
 
 .text-uppercase {
     font-family: sans-serif;
@@ -91,7 +106,7 @@ body {
 }
 
 .login-sec .copy-text a:hover {
-    color: #95193c;
+    color: #9F6162;
     text-decoration: underline;
 }
 
@@ -99,64 +114,30 @@ body {
     margin-bottom: 20px;
     font-weight: 800;
     font-size: 30px;
-    color: #95193c;
+    color: #9F6162;
 }
 
-.login-sec h2:after {
-    content: " ";
-    width: 100px;
-    height: 5px;
-    background: #95193c;
-    display: block;
-    margin-top: 15px;
-    border-radius: 3px;
-    margin-left: auto;
-    margin-right: auto
-}
+
 
 .login-button {
-    background: #95193c;
+    background: #9F6162;
     border: 1px solid transparent;
     height: 40px;
     color: #fff;
     font-weight: 600;
     font-size: 18px;
-    background: -webkit-linear-gradient(right, #EA1350, #ffffff, #95193c);
-    background: -o-linear-gradient(right, #EA1350, #ffffff, #95193c);
-    background: linear-gradient(right, #EA1350, #ffffff, #95193c);
+    background: -webkit-linear-gradient(right, #9F6162, #6e3535, #9F6162);
+    background: -o-linear-gradient(right, #9F6162, #9F6162, #9F6162);
+    background: linear-gradient(right, #9F6162, #9F6162, #9F6162);
     background-size: 250% 100%;
     background-position: 100% 50%;
     transition: 0.6s;
     cursor: pointer;
-    border-radius: 20px;
+    border-radius: 10px;
     margin-top: 20px;
 }
 
-.banner-text {
-    width: 80%;
-    position: absolute;
-    bottom: 20px;
-    padding-left: 15px;
-}
 
-.banner-text h2 {
-    color: #ffffff;
-    font-weight: 600;
-}
-
-.banner-text h2:after {
-    content: " ";
-    width: 100px;
-    height: 5px;
-    background: #ffffff;
-    display: block;
-    margin-top: 10px;
-    border-radius: 3px;
-}
-
-.banner-text p {
-    color: #ffffff;
-}
 
 .login-button:hover,
 .login-button:focus {
@@ -181,9 +162,11 @@ body {
         justify-content: center;
         align-items: center;
     }
+
     .login-block {
         padding: 0;
     }
+
     body {
         align-items: stretch;
     }
@@ -195,9 +178,11 @@ body {
         flex: 0 0 100%;
         min-width: 100%
     }
+
     .login-wrapper {
         width: 90%;
     }
+
     .banner-sec {
         display: none !important;
     }
