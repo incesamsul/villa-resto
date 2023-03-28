@@ -124,12 +124,16 @@ Route::group(['middleware' => ['auth', 'ceklevel:resepsionis']], function () {
 
 
 // KASIR ROUTE
-Route::group(['middleware' => ['auth', 'ceklevel:kasir']], function () {
+Route::group(['middleware' => ['auth', 'ceklevel:Administrator,kasir,owner']], function () {
     Route::group(['prefix' => 'admin'], function () {
         // GET REQUEST
 
         Route::get('/pos', [Admin::class, 'pos']);
         Route::get('/pos/kategori/{kategori}', [Admin::class, 'posKategori']);
+        Route::get('/pos/cetak', [Admin::class, 'cetakPos']);
+        Route::get('/transaksi_pos', [Admin::class, 'transaksiPos']);
+        Route::get('/transaksi_pos/{id_transaksi_pos}', [Admin::class, 'detailTransaksiPos']);
+        Route::post('/create_pos', [Admin::class, 'createPos']);
     });
 });
 

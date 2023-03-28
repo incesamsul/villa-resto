@@ -11,7 +11,9 @@ use App\Models\Kategori;
 use App\Models\Kuliner;
 use App\Models\Menu;
 use App\Models\Penginapan;
+use App\Models\TagihanPos;
 use App\Models\Tamu;
+use App\Models\TransaksiPos;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -92,6 +94,27 @@ class Admin extends Controller
         return view('pages.pos.index', $data);
     }
 
+
+    public function transaksiPos()
+    {
+        $data['transaksi'] = TransaksiPos::all();
+        return view('pages.transaksi.pos', $data);
+    }
+
+    public function detailTransaksiPos($idTransaksiPos)
+    {
+        $data['transaksi'] = TagihanPos::where('id_transaksi_pos', $idTransaksiPos)->get();
+        return view('pages.transaksi.detail', $data);
+    }
+
+    public function cetakPos()
+    {
+        $transaksiTerakhir = TransaksiPos::latest()->first();
+        $data['pembayaran'] = $transaksiTerakhir->pembayaran;
+        $data['tagihan'] = TagihanPos::where('id_transaksi_pos', $transaksiTerakhir->id_transaksi_pos)->get();
+        return view('pages.pos.cetak', $data);
+    }
+
     public function posKategori($kategori)
     {
         if ($kategori == "all") {
@@ -143,7 +166,23 @@ class Admin extends Controller
     }
 
 
-
+    public function createPos(Request $request)
+    {
+        $transaksi = TransaksiPos::create([
+            'id_user' => auth()->user()->id,
+            'tgl_transaksi' => Carbon::now(),
+            'jam_transaksi' => getHour(),
+            'pembayaran' => (float) str_replace(",", "", $request->pembayaran),
+        ])->id;
+        foreach ($request->pos as $row) {
+            TagihanPos::create([
+                'id_transaksi_pos' => $transaksi,
+                'id_menu' => $row['id_menu'],
+                'qty' => $row['qty']
+            ]);
+        }
+        return 1;
+    }
 
 
 

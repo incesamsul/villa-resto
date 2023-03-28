@@ -98,7 +98,17 @@
                                 <strong>Total</strong>
                                 <strong id="total">Rp. -</strong>
                             </div>
-                            <button class="full-width mt-4 second-radius btn bg-main text-white">Print Tagihan</button>
+                            <div class="d-flex justify-content-between mt-2">
+                                <strong>Kembalian</strong>
+                                <strong id="kembalian">Rp. -</strong>
+                            </div>
+                            <div class="pembayaran-wrapper">
+                                <input placeholder="masukkan pembayaran" type="text"
+                                    class="number_format main-radius mt-3 form-control" name="pembayaran" id="pembayaran">
+                                <small class="required text-danger"></small>
+                            </div>
+                            <button id="btn-print-tagihan"
+                                class=" full-width mt-4 second-radius btn bg-main text-white">Print Tagihan</button>
                         </div>
                     </div>
                 </div>
@@ -111,6 +121,10 @@
         $('#liPos').addClass('active');
         $(document).ready(function() {
 
+            $('.pembayaran-wrapper').hide();
+            $('#btn-print-tagihan').prop('disabled', true);
+            $('#btn-print-tagihan').addClass('disabled');
+
             $(document).on('click', '.btn-kategori', function(e) {
                 e.preventDefault();
                 var $this = $(this).children();
@@ -119,7 +133,6 @@
                     $this.addClass('active');
                 }
                 let namaKategori = $(this).data('nama_kategori');
-                console.log(namaKategori);
                 $.ajax({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -145,6 +158,10 @@
             let orderedList = [];
 
             $(document).on('click', '.btn-pesan', function() {
+                $('.pembayaran-wrapper').show();
+                $('#btn-print-tagihan').prop('disabled', false);
+                $('#btn-print-tagihan').removeClass('disabled');
+
                 let pesanan = $(this).data('pesanan');
                 let path = $(this).data('path');
                 // check if item already exists in ordered list
@@ -190,6 +207,13 @@
                     $('#subtotal').html('Rp. ' + addCommas(subtotal))
                     $('#tax').html('Rp. ' + addCommas(subtotal))
                     $('#total').html('Rp. ' + addCommas(subtotal))
+
+                    $('#pembayaran').on('keyup', function() {
+                        let pembayaran = $(this).val();
+                        let bayar = parseFloat(pembayaran.replace(',', ''))
+                        $('#kembalian').html("Rp. " + addCommas(parseInt(bayar) - parseInt(
+                            subtotal)));
+                    })
                 }
 
             })
@@ -213,6 +237,9 @@
                     if (orderedList[index].qty < 1) {
                         $('#qty_' + id_menu).closest('.tagihan-menu-wrapper').remove();
                         orderedList = orderedList.filter(item => item.id_menu !== id_menu);
+                        $('.pembayaran-wrapper').hide();
+                        $('#btn-print-tagihan').prop('disabled', true);
+                        $('#btn-print-tagihan').addClass('disabled');
                     }
                 }
                 let subtotal = 0;
@@ -227,6 +254,42 @@
             }
 
 
+            $('#btn-print-tagihan').on('click', function() {
+                let pembayaran = $('#pembayaran').val();
+                if (pembayaran === '') {
+                    $('.required').html('harus di isi');
+                    return;
+                }
+
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: '/admin/create_pos',
+                    // dataType: 'json',
+                    data: {
+                        pos: orderedList,
+                        pembayaran: pembayaran,
+                    },
+                    method: 'post',
+                    success: function(data) {
+                        if (data == 1) {
+                            Swal.fire('Berhasil', 'Transaksi terimpan',
+                                'success').then((result) => {
+                                document.location.href = '/admin/pos/cetak'
+                            });
+                        }
+                    },
+                    error: function(err) {
+                        console.log(err)
+                    },
+                    beforeSend: function() {},
+                    complete: function() {}
+                })
+            })
+
+
+            // STICKY BILL
 
             let tagihanOffset = $('#tagihan').offset().top;
 

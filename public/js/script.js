@@ -4,6 +4,17 @@ $(function () {
 })
 
 
+$('.number_format').on('input', function () {
+    // Get the input value and remove any non-numeric characters
+    let value = $(this).val().replace(/\D/g, '');
+
+    // Format the number with commas every three digits
+    let formattedValue = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+    // Set the formatted value back into the input field
+    $(this).val(formattedValue);
+});
+
 // JS CLIEND VALIDATOIN
 function errorMessageDisplay(name) {
     if ($("#" + name).val() == '' || $("#" + name).val() == null) {
