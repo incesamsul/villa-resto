@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBeritaTable extends Migration
+class CreatePasswordResetsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateBeritaTable extends Migration
      */
     public function up()
     {
-        Schema::create('berita', function (Blueprint $table) {
-            $table->increments('id_berita');
-            $table->date('tgl_berita');
-            $table->string('gambar_berita');
-            $table->string('judul_berita');
-            $table->string('isi_berita', 5000);
+        Schema::create('password_resets', function (Blueprint $table) {
+            $table->string('wa')->index();
+            $table->string('token');
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ class CreateBeritaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('berita');
+        Schema::dropIfExists('password_resets');
     }
 }

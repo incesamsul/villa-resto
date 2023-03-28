@@ -29,30 +29,60 @@
             <div class="row login-row">
                 <div class="col-md-4 login-sec ">
                     <h2>Villa & Resto</h2>
-                    <p class="text-secondary mb-5"><small>login untuk mulai menggunakan aplikasi</small></p>
-                    @if (session('fail'))
-                        <p class="text-danger"><small>{{ session('fail') }}</small></p>
+                    <p class="text-secondary"><small><strong>Langkah-langkah lupa password</strong></small></p>
+                    <ul>
+                        @mobile
+                            <li><small>klik <a target="_blank"
+                                        href="http://wa.me/+14155238886?text=join%20breathe-report">disini</a> lalu
+                                    kirim
+                                    pesan "join breathe-report"</small></li>
+                        @endmobile
+                        @desktop
+                            <li><small>klik <a target="_blank"
+                                        href="https://web.whatsapp.com/send/?phone=%2B14155238886&text=join+breathe-report">disini</a>
+                                    lalu
+                                    kirim
+                                    pesan "join breathe-report"</small></li>
+                        @enddesktop
+                        <li><small>pastikan mendapat balasan seperti gambar <a target="_blank"
+                                    href="{{ asset('img/help/wa_reset_pass.png') }}">lihat</a></small></li>
+                        <li><small>setelah masukkan wa di form dibawah</small></li>
+                        <li><small>anda akan mendapatkan link seperti <a
+                                    href="{{ asset('img/help/wa_reset_pass2.png') }}" target="_blank"
+                                    rel="noopener noreferrer">ini</a></small></li>
+                        <li><small>buka link tersebut dan lakukan reset password</small></li>
+                    </ul>
+                    @if ($response)
+                        @if ($response == 200)
+                            <p class="m-0 mt-3 p-0 text-success">wa reset password telah dikirim ke wa anda, <span
+                                    class="text-warning">Jika tidak masuk klik disini</span></p>
+                        @elseif ($response == 500)
+                            <p class="m-0 mt-3 p-0 text-danger">Terjadi kesalahan ...</p>
+                        @else
+                            <p></p>
+                        @endif
                     @endif
                     @if (session('success'))
                         <p class="m-0 mt-3 p-0 text-success">{{ session('success') }}</p>
                     @endif
-                    <form action="{{ URL::to('/postlogin') }}" method="post">
+                    @if (session('error'))
+                        <p class="m-0 mt-3 p-0 text-danger">{{ session('error') }}</p>
+                    @endif
+                    @if (session('fail'))
+                        <p class="text-danger"><small>{{ session('fail') }}</small></p>
+                    @endif
+                    <form method="POST" action="{{ route('kirim-konfirmasi-wa') }}">
                         @csrf
+
                         <div class="form-group text-secondary">
                             <i class="fa fa-user" style="font-size: 12px"></i>
-                            <label for="email" class="text-uppercase "><strong>Email</strong></label>
-                            <input name="email" type="text" class="form-control border-0"
-                                placeholder="Masukkan email anda">
+                            <label for="wa" class="text-uppercase "><strong>wa</strong></label>
+                            <input name="wa" type="text" class="form-control border-0"
+                                placeholder="Masukkan wa anda">
 
                         </div>
-                        <div class="form-group text-secondary">
-                            <i class="fa fa-key" style="font-size: 12px"></i>
-                            <label for="password" class="text-uppercase"><strong>Password</strong></label>
-                            <input name="password" type="password" class="form-control border-0"
-                                placeholder="Masukkan password anda">
-                        </div>
-                        <a href="{{ URL::to('/lupa-kata-sandi') }}" class="forgot"><u> Forgot Your Password?</u></a>
-                        <button type="submit" class="btn-block login-button">Login</button>
+                        <a href="{{ URL::to('/login') }}" class="forgot"><u> Kembali ke halaman Login?</u></a>
+                        <button type="submit" class="btn-block login-button">Kirim</button>
                     </form>
                     <div class="copy-text">Copyright © 2022 ♦ .</div>
                 </div>

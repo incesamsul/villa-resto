@@ -5,7 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 
 use App\Http\Controllers\General;
 use App\Http\Controllers\Home;
-
+use App\Http\Controllers\LupaKataSandiController;
 use App\Http\Controllers\Penilai;
 
 use App\Http\Controllers\UserController;
@@ -53,6 +53,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:Administrator,owner,resepsionis
     Route::get('/dashboard', [General::class, 'dashboard']);
     Route::get('/profile', [General::class, 'profile']);
     Route::get('/bantuan', [General::class, 'bantuan']);
+    Route::post('/ganti_kata_sandi', [General::class, 'gantiKataSandi']);
 
     Route::post('/ubah_foto_profile', [General::class, 'ubahFotoProfile']);
     Route::post('/ubah_role', [General::class, 'ubahRole']);
@@ -145,3 +146,12 @@ Route::group(['middleware' => ['auth', 'ceklevel:owner']], function () {
         Route::get('/pemasukan_villa', [Admin::class, 'pemasukanVilla']);
     });
 });
+
+
+// ROUTE LUPA KATA SANDI
+
+Route::get("/lupa-kata-sandi", [LupaKataSandiController::class, "index"])->name("lupa-kata-sandi");
+Route::get("/lupa-kata-sandi/{response}", [LupaKataSandiController::class, "index"]);
+Route::post("/kirim-konfirmasi-wa", [LupaKataSandiController::class, "kirimKonfirmasiWa"])->name("kirim-konfirmasi-wa");
+Route::get('/reset-password/{kode_reset}', [LupaKataSandiController::class, "getResetPassword"])->name('getResetPassword');
+Route::post('/post-reset-password/{kode_reset}', [LupaKataSandiController::class, "resetPassword"])->name('post-reset-password');

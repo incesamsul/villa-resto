@@ -124,7 +124,7 @@
             <div class="row mb-5">
                 <div class="col-md">
                     <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Villa@resto</h2>
+                        <h2 class="ftco-heading-2 text-white">Villa@resto</h2>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet, voluptates.</p>
                         <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                             <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
@@ -135,7 +135,7 @@
                 </div>
                 <div class="col-md">
                     <div class="ftco-footer-widget mb-4 ml-md-5">
-                        <h2 class="ftco-heading-2">Useful Links</h2>
+                        <h2 class="ftco-heading-2 text-white">Useful Links</h2>
                         <ul class="list-unstyled">
                             <li><a href="#" class="py-2 d-block">villa</a></li>
                             <li><a href="#" class="py-2 d-block">resto</a></li>
@@ -146,7 +146,7 @@
                 </div>
                 <div class="col-md">
                     <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Privacy</h2>
+                        <h2 class="ftco-heading-2 text-white">Privacy</h2>
                         <ul class="list-unstyled">
                             <li><a href="#" class="py-2 d-block">Career</a></li>
                             <li><a href="#" class="py-2 d-block">About Us</a></li>
@@ -157,7 +157,7 @@
                 </div>
                 <div class="col-md">
                     <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Have a Questions?</h2>
+                        <h2 class="ftco-heading-2 text-white">Have a Questions?</h2>
                         <div class="block-23 mb-3">
                             <ul>
                                 <li><span class="icon icon-map-marker"></span><span class="text">Jl tamalate 1 no

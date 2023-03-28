@@ -33,6 +33,6 @@ INSERT INTO `menu` (`id_menu`, `id_kategori`, `nama_menu`, `deskripsi`, `gambar`
 
 
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role`, `foto`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin@mail.com', NULL, '$2y$10$N6nmGrHUtLAw5/5SlPZqEehn.S5KDNDFHf1yuW184mEw5zLWhVeLm', 'Administrator', '64213a5d9d191.jpg', NULL, '2021-11-24 01:06:43', '2023-03-26 22:40:29');
+INSERT INTO `users` (`id`, `name`, `email`, `wa`, `email_verified_at`, `password`, `role`, `foto`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'admin', 'admin@mail.com', '0895324670360',NULL, '$2y$10$N6nmGrHUtLAw5/5SlPZqEehn.S5KDNDFHf1yuW184mEw5zLWhVeLm', 'Administrator', '64213a5d9d191.jpg', NULL, '2021-11-24 01:06:43', '2023-03-26 22:40:29');
 

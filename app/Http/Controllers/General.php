@@ -41,6 +41,14 @@ class General extends Controller
         return redirect()->back();
     }
 
+    public function gantiKataSandi(Request $request)
+    {
+        User::where('id', auth()->user()->id)->update([
+            'password' => bcrypt($request->password_baru)
+        ]);
+        return redirect()->back()->with('message', 'password berhasil di ganti');
+    }
+
     public function ubahFotoProfile(Request $request)
     {
 

@@ -8,9 +8,34 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use phpDocumentor\Reflection\Types\Null_;
 use PhpParser\Node\Expr\FuncCall;
+use Twilio\Rest\Client;
 
 use function PHPUnit\Framework\isNull;
 
+function convertNoHp($noHp)
+{
+    return '62' . substr($noHp, 1);
+}
+
+function sendWhatsAppMessage($wa, $pesan)
+{
+    $_wa = convertNoHp($wa);
+    $account_sid = 'AC80c49cc0f6ee0b7b01a332c886df472a';
+    $auth_token = 'aaec5a7bccb137143f78f873abaa40c5';
+    $twilio_whatsapp_number = 'whatsapp:+14155238886';
+
+    $client = new Client($account_sid, $auth_token);
+
+    $message = $client->messages->create(
+        'whatsapp:' . $_wa,
+        [
+            'from' => $twilio_whatsapp_number,
+            'body' => $pesan,
+        ]
+    );
+
+    return response()->json(['status' => 'success', 'message' => 'WhatsApp message sent!']);
+}
 
 function getHour()
 {

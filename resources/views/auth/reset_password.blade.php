@@ -29,20 +29,20 @@
             <div class="row login-row">
                 <div class="col-md-4 login-sec ">
                     <h2>Villa & Resto</h2>
-                    <p class="text-secondary mb-5"><small>login untuk mulai menggunakan aplikasi</small></p>
-                    @if (session('fail'))
-                        <p class="text-danger"><small>{{ session('fail') }}</small></p>
-                    @endif
+                    <p class="text-secondary mb-5"><small>Silahkan mereset password anda</small></p>
                     @if (session('success'))
                         <p class="m-0 mt-3 p-0 text-success">{{ session('success') }}</p>
                     @endif
-                    <form action="{{ URL::to('/postlogin') }}" method="post">
+                    @if (session('error'))
+                        <p class="m-0 mt-3 p-0 text-danger">{{ session('error') }}</p>
+                    @endif
+                    <form method="POST" action="{{ route('post-reset-password', $kodeReset) }}">
                         @csrf
                         <div class="form-group text-secondary">
                             <i class="fa fa-user" style="font-size: 12px"></i>
-                            <label for="email" class="text-uppercase "><strong>Email</strong></label>
-                            <input name="email" type="text" class="form-control border-0"
-                                placeholder="Masukkan email anda">
+                            <label for="wa" class="text-uppercase "><strong>wa</strong></label>
+                            <input name="wa" type="text" class="form-control border-0"
+                                placeholder="Masukkan wa anda">
 
                         </div>
                         <div class="form-group text-secondary">
@@ -51,8 +51,15 @@
                             <input name="password" type="password" class="form-control border-0"
                                 placeholder="Masukkan password anda">
                         </div>
-                        <a href="{{ URL::to('/lupa-kata-sandi') }}" class="forgot"><u> Forgot Your Password?</u></a>
-                        <button type="submit" class="btn-block login-button">Login</button>
+                        <div class="form-group text-secondary">
+                            <i class="fa fa-key" style="font-size: 12px"></i>
+                            <label for="konfirmasi_password" class="text-uppercase"><strong>Konfirmasi
+                                    Password</strong></label>
+                            <input name="konfirmasi_password" type="password" class="form-control border-0"
+                                placeholder="konfirmasi password anda">
+                        </div>
+                        <a href="{{ URL::to('/login') }}" class="forgot"><u> Kembali ke halaman Login?</u></a>
+                        <button type="submit" class="btn-block login-button">Reset</button>
                     </form>
                     <div class="copy-text">Copyright © 2022 ♦ .</div>
                 </div>

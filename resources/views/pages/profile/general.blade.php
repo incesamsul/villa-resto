@@ -47,13 +47,18 @@
                     </li>
                     <li class="media">
                         <div class="media-body">
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="Ganti Kata sandi"
-                                    aria-label="Recipient's username" aria-describedby="basic-addon2">
-                                <div class="input-group-append">
-                                    <button class="btn bg-main text-white" type="button">Ganti</button>
+                            <form action="{{ URL::to('/ganti_kata_sandi') }}" method="POST">
+                                @csrf
+                                <div class="input-group mb-3">
+                                    <input name="password_baru" type="text" class="form-control"
+                                        placeholder="Ganti Kata sandi" aria-label="Recipient's username"
+                                        aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                        <button onclick="return confirm('yakin ? ')" class="btn bg-main text-white"
+                                            type="button">Ganti</button>
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </li>
                     {{-- <li class="media">
