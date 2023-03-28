@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Berita;
 use App\Models\CheckIn;
+use App\Models\CheckOut;
 use App\Models\Destination;
 use App\Models\Kamar;
 use App\Models\Kategori;
 use App\Models\Kuliner;
 use App\Models\Menu;
 use App\Models\Penginapan;
+use App\Models\Tamu;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -38,22 +40,10 @@ class Admin extends Controller
     }
 
 
-    public function destination()
+    public function pemasukanVilla()
     {
-        $data['destination'] = Destination::all();
-        return view('pages.destination.index', $data);
-    }
-
-    public function berita()
-    {
-        $data['berita'] = Berita::all();
-        return view('pages.berita.index', $data);
-    }
-
-    public function penginapan()
-    {
-        $data['penginapan'] = Penginapan::all();
-        return view('pages.penginapan.index', $data);
+        $data['check_in'] = CheckIn::all();
+        return view('pages.pemasukan_villa.index', $data);
     }
 
 
@@ -63,8 +53,16 @@ class Admin extends Controller
         return view('pages.kamar.index', $data);
     }
 
+    public function checkOut()
+    {
+        $data['tamu'] = CheckOut::all();
+        $data['kamar'] = Kamar::where('status', '0')->get();
+        return view('pages.kamar.check_out', $data);
+    }
+
     public function checkIn($idKamar = null)
     {
+        $data['tamu'] = CheckIn::all();
         if ($idKamar) {
             $data['id_kamar'] = $idKamar;
             $data['kamar'] = Kamar::where('id_kamar', $idKamar)->first();
@@ -178,15 +176,39 @@ class Admin extends Controller
         }
     }
 
+    // CEK OUT
+
+    public function createCheckOut($id_kamar)
+    {
+        $checkIn = CheckIn::where('id_kamar', $id_kamar)->first();
+        $tamu = $checkIn ? $checkIn->id_tamu : 0;
+        CheckOut::create([
+            'id_kamar' => $id_kamar,
+            'tgl_check_out' => Carbon::now(),
+            'jam_check_out' => getHour(),
+            'id_tamu' => $tamu
+        ]);
+
+        Kamar::where('id_kamar', $id_kamar)->update([
+            'status' => '1'
+        ]);
+
+        return redirect('/admin/check_out')->with('message', 'check out berhasil');
+    }
+
     // CRUD CEK IN
 
     public function createCheckIn(Request $request)
     {
+        $tamu = Tamu::create([
+            'nama_tamu' => $request->nama_tamu,
+        ])->id;
+
         CheckIn::create([
             'id_kamar' => $request->id_kamar,
             'tgl_check_in' => Carbon::now(),
-            'jam_check_in' => Carbon::now(),
-            'nama_tamu' => $request->nama_tamu
+            'jam_check_in' => getHour(),
+            'id_tamu' => $tamu
         ]);
 
         Kamar::where('id_kamar', $request->id_kamar)->update([
@@ -415,6 +437,7 @@ class Admin extends Controller
         Kamar::where('id_kamar', $request->id)->update([
             'nama_kamar' => $request->nama_kamar,
             'harga_kamar' => $request->harga_kamar,
+            'status' => $request->status
         ]);
 
 

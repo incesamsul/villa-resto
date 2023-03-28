@@ -6,7 +6,7 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Kamar tersedia</h4>
+                        <h4>Kamar terisi</h4>
                     </div>
                 </div>
             </div>
@@ -16,13 +16,13 @@
                 <div class="col-sm-12">
                     <div class="card p-5 d-flex align-items-center">
                         <img src="{{ asset('img/svg/ilustration/contact.svg') }}" alt="food" width="300">
-                        <p class="mt-4">Semua kamar terisi</p>
+                        <p class="mt-4">Semua kamar kosong</p>
                     </div>
                 </div>
             @endif
             @foreach ($kamar as $row)
                 <div class="col-lg-3">
-                    <a href="{{ URL::to('/admin/check_in/' . $row->id_kamar) }}">
+                    <a onclick="return confirm('yakin ? ')" href="{{ URL::to('/admin/check_out/' . $row->id_kamar) }}">
                         <div class="card my-card pt-5 pb-3 text-center">
                             <i class="text-dark fa-regular fa-building  room-icon"></i>
                             <h5 class="text-dark mt-4">{{ $row->nama_kamar }}</h5>
@@ -37,7 +37,7 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Data Tamu check in</h4>
+                        <h4>Data Tamu check out</h4>
                     </div>
                     <div class="card-body">
                         <table class="table table-striped table-hover table-user table-action-hover" id="table-data">
@@ -46,8 +46,8 @@
                                     <th>#</th>
                                     <td>Nama Tamu</td>
                                     <td>Kamar</td>
-                                    <td>Jam check in</td>
-                                    <td>Tgl check in</td>
+                                    <td>Jam check out</td>
+                                    <td>Tgl check out</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -56,9 +56,8 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $row->tamu->nama_tamu }}</td>
                                         <td>{{ $row->kamar->nama_kamar }}</td>
-                                        <td>{{ $row->jam_check_in }}</td>
-                                        <td>{{ $row->tgl_check_in }}</td>
-
+                                        <td>{{ $row->jam_check_out }}</td>
+                                        <td>{{ $row->tgl_check_out }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -71,6 +70,6 @@
 @endsection
 @section('script')
     <script>
-        $('#liCheckIn').addClass('active');
+        $('#liCheckOut').addClass('active');
     </script>
 @endsection

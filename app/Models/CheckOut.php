@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CheckIn extends Model
+class CheckOut extends Model
 {
     use HasFactory;
 
-    protected $table = 'check_in';
-    protected $guarded = ['id_check_in'];
+    protected $table = 'check_out';
+    protected $guarded = ['id_check_out'];
 
     public function kamar()
     {

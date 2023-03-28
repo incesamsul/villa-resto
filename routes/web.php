@@ -48,7 +48,7 @@ Route::group(['middleware' => ['guest']], function () {
 });
 
 // GENERAL CONTROLLER ROUTE
-Route::group(['middleware' => ['auth', 'ceklevel:Administrator,user']], function () {
+Route::group(['middleware' => ['auth', 'ceklevel:Administrator,owner,resepsionis,kasir']], function () {
 
     Route::get('/dashboard', [General::class, 'dashboard']);
     Route::get('/profile', [General::class, 'profile']);
@@ -69,12 +69,11 @@ Route::group(['middleware' => ['auth', 'ceklevel:Administrator']], function () {
         // GET REQUEST
         Route::get('/pengguna', [Admin::class, 'pengguna']);
         Route::get('/fetch_data', [Admin::class, 'fetchData']);
-        Route::get('/destination', [Admin::class, 'destination']);
-        Route::get('/berita', [Admin::class, 'berita']);
-        Route::get('/penginapan', [Admin::class, 'penginapan']);
         Route::get('/kamar', [Admin::class, 'kamar']);
         Route::get('/check_in', [Admin::class, 'checkIn']);
         Route::get('/check_in/{id_kamar}', [Admin::class, 'checkIn']);
+        Route::get('/check_out', [Admin::class, 'checkOut']);
+        Route::get('/check_out/{id_kamar}', [Admin::class, 'createCheckOut']);
         Route::get('/pos', [Admin::class, 'pos']);
         Route::get('/pos/kategori/{kategori}', [Admin::class, 'posKategori']);
         Route::get('/kategori', [Admin::class, 'kategori']);
@@ -100,30 +99,45 @@ Route::group(['middleware' => ['auth', 'ceklevel:Administrator']], function () {
         Route::post('/ubah_kamar', [Admin::class, 'ubahKamar']);
         Route::post('/hapus_kamar', [Admin::class, 'hapusKamar']);
 
-        // CRUD PENGINAPAN
-        Route::post('/tambah_penginapan', [Admin::class, 'tambahPenginapan']);
-        Route::post('/ubah_penginapan', [Admin::class, 'ubahPenginapan']);
-        Route::post('/hapus_penginapan', [Admin::class, 'hapusPenginapan']);
-
-        // CRUD BERITA
-        Route::post('/tambah_berita', [Admin::class, 'tambahBerita']);
-        Route::post('/ubah_berita', [Admin::class, 'ubahBerita']);
-        Route::post('/hapus_berita', [Admin::class, 'hapusBerita']);
-
-        // CRUD KULINER
-        Route::post('/tambah_kuliner', [Admin::class, 'tambahKuliner']);
-        Route::post('/ubah_kuliner', [Admin::class, 'ubahKuliner']);
-        Route::post('/hapus_kuliner', [Admin::class, 'hapusKuliner']);
-
-
-        // CRUD DESTINATION
-        Route::post('/tambah_destination', [Admin::class, 'tambahDestination']);
-        Route::post('/ubah_destination', [Admin::class, 'ubahDestination']);
-        Route::post('/hapus_destination', [Admin::class, 'hapusDestination']);
-
         // CRUD PENGGUNA
         Route::post('/create_pengguna', [Admin::class, 'createPengguna']);
         Route::post('/update_pengguna', [Admin::class, 'updatePengguna']);
         Route::post('/delete_pengguna', [Admin::class, 'deletePengguna']);
+    });
+});
+
+
+// RESEPSIONIS ROUTE
+Route::group(['middleware' => ['auth', 'ceklevel:resepsionis']], function () {
+    Route::group(['prefix' => 'admin'], function () {
+        // GET REQUEST
+
+        Route::get('/check_in', [Admin::class, 'checkIn']);
+        Route::get('/check_in/{id_kamar}', [Admin::class, 'checkIn']);
+        Route::get('/check_out', [Admin::class, 'checkOut']);
+        Route::get('/check_out/{id_kamar}', [Admin::class, 'createCheckOut']);
+
+        // CRUD CEK IN
+        Route::post('/create_check_in', [Admin::class, 'createCheckIn']);
+    });
+});
+
+
+// KASIR ROUTE
+Route::group(['middleware' => ['auth', 'ceklevel:kasir']], function () {
+    Route::group(['prefix' => 'admin'], function () {
+        // GET REQUEST
+
+        Route::get('/pos', [Admin::class, 'pos']);
+        Route::get('/pos/kategori/{kategori}', [Admin::class, 'posKategori']);
+    });
+});
+
+// OWNER ROUTE
+Route::group(['middleware' => ['auth', 'ceklevel:owner']], function () {
+    Route::group(['prefix' => 'admin'], function () {
+        // GET REQUEST
+        Route::get('/kamar', [Admin::class, 'kamar']);
+        Route::get('/pemasukan_villa', [Admin::class, 'pemasukanVilla']);
     });
 });

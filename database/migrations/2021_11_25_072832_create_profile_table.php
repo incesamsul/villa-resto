@@ -19,17 +19,6 @@ class CreateProfileTable extends Migration
             $table->enum('jenis_kelamin', ['L', 'P']);
             $table->string('tempat_lahir', 75);
             $table->date('tanggal_lahir');
-            $table->string('nisn', 30);
-            $table->string('alamat', 80);
-            $table->string('no_telp', 20);
-            $table->string('nama_ayah', 75);
-            $table->string('pekerjaan_ayah', 75);
-            $table->string('nama_ibu', 75);
-            $table->string('pekerjaan_ibu', 75);
-            $table->year('tahun_masuk');
-            $table->year('tahun_lulus');
-            $table->string('no_ijazah', 75);
-            $table->string('no_skhun', 75);
             $table->timestamps();
             $table->foreign('id_user')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
         });

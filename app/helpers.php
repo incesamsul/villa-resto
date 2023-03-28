@@ -3,6 +3,7 @@
 use App\Models\FavoritModel;
 use App\Models\KategoriModel;
 use App\Models\LogAktivitasModel;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use phpDocumentor\Reflection\Types\Null_;
@@ -10,6 +11,17 @@ use PhpParser\Node\Expr\FuncCall;
 
 use function PHPUnit\Framework\isNull;
 
+
+function getHour()
+{
+    // Create a new Carbon instance with the current time and the default timezone
+    $now = Carbon::now();
+    // Set the timezone of the Carbon instance to Makassar
+    $now->setTimezone('Asia/Makassar');
+    // Get the hour in the Makassar timezone
+    $hour = $now->format('H:i:s');
+    return $hour;
+}
 
 function spaceToLine($string)
 {

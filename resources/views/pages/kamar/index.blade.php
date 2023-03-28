@@ -2,68 +2,106 @@
 
 @section('content')
     <section class="section">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-header d-flex  justify-content-between">
-                        <h4>Data Kamar</h4>
-                        <div class="table-tools d-flex justify-content-around ">
-                            <button type="button" class="btn bg-main text-white float-right" data-toggle="modal"
-                                id="addUserBtn" data-target="#modalkamar"><i class="fas fa-plus"></i></button>
+        @if (auth()->user()->role != 'owner')
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header d-flex  justify-content-between">
+                            <h4>Data Kamar</h4>
+                            <div class="table-tools d-flex justify-content-around ">
+                                <button type="button" class="btn bg-main text-white float-right" data-toggle="modal"
+                                    id="addUserBtn" data-target="#modalkamar"><i class="fas fa-plus"></i></button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card-body p-0">
-                        <table class="table table-striped table-hover table-user table-action-hover" id="table-data">
-                            <thead>
-                                <tr>
-                                    <th width="5%" class="sorting" data-sorting_type="asc" data-column_name="id"
-                                        style="cursor: pointer">ID <span id="id_icon"></span></th>
-                                    <td>Nama kamar</td>
-                                    <td>Harga kamar/malam</td>
-                                    <td>Status</td>
-                                    {{-- <td>Detail</td> --}}
-                                    <td></td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($kamar as $row)
+                        <div class="card-body p-0">
+                            <table class="table table-striped table-hover table-user table-action-hover" id="table-data">
+                                <thead>
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $row->nama_kamar }}</td>
-                                        <td>RP. {{ number_format($row->harga_kamar) }}</td>
-                                        <td>
-                                            @if ($row->status == '0')
-                                                <span class="badge badge-danger">unavailable</span>
-                                            @else
-                                                <span class="badge badge-success">available</span>
-                                            @endif
-                                        </td>
-                                        <td class="option">
-                                            <div class="btn-group dropleft btn-option">
-                                                <i type="button" class="dropdown-toggle" data-toggle="dropdown"
-                                                    aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fas fa-ellipsis-v"></i>
-                                                </i>
-                                                <div class="dropdown-menu">
-                                                    <a data-toggle="modal" data-target="#modalkamar"
-                                                        data-edit='@json($row)' class="dropdown-item edit"
-                                                        href="#"><i class="fas fa-pen"> Edit</i></a>
-                                                    <a data-id_kamar="{{ $row->id_kamar }}" class="dropdown-item hapus"
-                                                        href="#"><i class="fas fa-trash">
-                                                            Hapus</i></a>
-                                                </div>
-                                            </div>
-                                        </td>
+                                        <th width="5%" class="sorting" data-sorting_type="asc" data-column_name="id"
+                                            style="cursor: pointer">ID <span id="id_icon"></span></th>
+                                        <td>Nama kamar</td>
+                                        <td>Harga kamar/malam</td>
+                                        <td>Status</td>
+                                        {{-- <td>Detail</td> --}}
+                                        <td></td>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        <input type="hidden" name="hidden_page" id="hidden_page" value="1" />
-                        <input type="hidden" name="hidden_column_name" id="hidden_column_name" value="id" />
-                        <input type="hidden" name="hidden_sort_type" id="hidden_sort_type" value="asc" />
+                                </thead>
+                                <tbody>
+                                    @foreach ($kamar as $row)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $row->nama_kamar }}</td>
+                                            <td>RP. {{ number_format($row->harga_kamar) }}</td>
+                                            <td>
+                                                @if ($row->status == '0')
+                                                    <span class="badge badge-danger">unavailable</span>
+                                                @else
+                                                    <span class="badge badge-success">available</span>
+                                                @endif
+                                            </td>
+                                            <td class="option">
+                                                <div class="btn-group dropleft btn-option">
+                                                    <i type="button" class="dropdown-toggle" data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false">
+                                                        <i class="fas fa-ellipsis-v"></i>
+                                                    </i>
+                                                    <div class="dropdown-menu">
+                                                        <a data-toggle="modal" data-target="#modalkamar"
+                                                            data-edit='@json($row)'
+                                                            class="dropdown-item edit" href="#"><i class="fas fa-pen">
+                                                                Edit</i></a>
+                                                        <a data-id_kamar="{{ $row->id_kamar }}" class="dropdown-item hapus"
+                                                            href="#"><i class="fas fa-trash">
+                                                                Hapus</i></a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            <input type="hidden" name="hidden_page" id="hidden_page" value="1" />
+                            <input type="hidden" name="hidden_column_name" id="hidden_column_name" value="id" />
+                            <input type="hidden" name="hidden_sort_type" id="hidden_sort_type" value="asc" />
+                        </div>
                     </div>
                 </div>
             </div>
+        @endif
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between">
+                        <h4>Daftar kamar</h4>
+                        <div class="ket">
+                            <span class="badge badge-danger">unavailable</span>
+                            <span class="badge badge-success">available</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            @if (count($kamar) < 1)
+                <div class="col-sm-12">
+                    <div class="card p-5 d-flex align-items-center">
+                        <img src="{{ asset('img/svg/ilustration/contact.svg') }}" alt="food" width="300">
+                        <p class="mt-4">Semua kamar terisi</p>
+                    </div>
+                </div>
+            @endif
+            @foreach ($kamar as $row)
+                <div class="col-lg-3">
+                    <div class="card my-card pt-5 pb-3 text-center">
+                        <i
+                            class="{{ $row->status == '0' ? 'text-danger' : 'text-success' }} fa-regular fa-building  room-icon"></i>
+                        <h5 class="text-dark mt-4">{{ $row->nama_kamar }}</h5>
+                        <p class="text-secondary">Rp. {{ number_format($row->harga_kamar) }}</p>
+                    </div>
+                </div>
+            @endforeach
         </div>
     </section>
 
@@ -94,6 +132,13 @@
                             <label for="harga_kamar">harga kamar/malam</label>
                             <input type="text" class="form-control" name="harga_kamar" required id="harga_kamar">
                         </div>
+                        <div class="form-group">
+                            <label for="status">status</label>
+                            <select name="status" id="status" class="form-control">
+                                <option value="1">available</option>
+                                <option value="0">unavailable</option>
+                            </select>
+                        </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
@@ -121,6 +166,7 @@
                 $('#id').val(dataEdit.id_kamar);
                 $('#nama_kamar').val(dataEdit.nama_kamar);
                 $('#harga_kamar').val(dataEdit.harga_kamar);
+                $('#status').val(dataEdit.status);
                 $('#formkamar').attr('action', '/admin/ubah_kamar');
             });
 

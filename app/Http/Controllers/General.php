@@ -25,7 +25,7 @@ class General extends Controller
 
     public function profile()
     {
-        $data['user'] = $this->userModel->getUserProfile(auth()->user()->id);
+        $data['user'] = User::where('id', auth()->user()->id)->first();
         return view('pages.profile.index', $data);
     }
 

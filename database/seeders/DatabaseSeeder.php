@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // Get the databse dump we wish to use
-        $sql = base_path('database/dumps/pemetaan_gis_toraja.sql');
+        $sql = base_path('database/dumps/villa_and_resto.sql');
 
         if ($sql) {
             // Remove foreign keys for now
