@@ -1,402 +1,222 @@
-@extends('layouts_halaman_depan.v_template')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('content')
-<!-- Login Form -->
+<head>
+    <title>Villa & resto</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<div class="login-form">
-    <div class="login-top">
-        <span class="close">&times;</span>
-    </div>
-    <div class="login">
-        <h3 class="text-center">
-            Travel Log In
-        </h3>
-        <div class="form-input">
-            <label>Email</label> <br>
-            <input type="email" name="" class="form-control">
-        </div>
-        <div class="form-input">
-            <label>Password</label> <br>
-            <input type="password" name="" class="form-control">
-        </div>
-        <div class="form-input">
-            <button type="submit" class="btn btn-login">Log In</button>
-        </div>
-        <a href="" class="text-center">Don't have account ? Register now</a>
-    </div>
-</div>
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">
 
-<div class="login-overlay"></div>
+    <link rel="stylesheet" href="{{ asset('template/eventalk-master/css/open-iconic-bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('template/eventalk-master/css/animate.css') }}">
 
-<!-- Section Header -->
+    <link rel="stylesheet" href="{{ asset('template/eventalk-master/css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('template/eventalk-master/css/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('template/eventalk-master/css/magnific-popup.css') }}">
 
-<section class="section-header">
-    <div class="section-header-image">
-        <img src="{{ asset('img/home/header.jpg') }}" alt="Header">
-    </div>
-    <div class="container">
-        <div class="section-header-inner">
-            <div class="section-header-title">
-                <h3 class="title">GREAT <br> ART <br>OF <br>toraja</h3>
-                <p>Telusuri Keindahan Yang <br> Belum Pernah Anda Temui Sebelumnya</p>
-                <a href="" class="btn btn-round btn-orange">See Our Vacation</a>
-            </div>
-            <div class="section-header-title-xs">
-                <h3 class="title">GREAT ART OF</h3>
-                <p>Telusuri Keindahan Yang <br> Belum Pernah Anda Temui Sebelumnya</p>
-                <a href="" class="btn btn-round btn-orange">See Our Vacation</a>
-            </div>
-        </div>
-    </div>
-</section>
+    <link rel="stylesheet" href="{{ asset('template/eventalk-master/css/aos.css') }}">
 
-<!-- Section About -->
+    <link rel="stylesheet" href="{{ asset('template/eventalk-master/css/ionicons.min.css') }}">
 
-<section class="section section-about">
-    <div class="about-head slides">
-        <h3>toraja Travel Time</h3>
-        <p><b>Travel</b> merupakan singkatan dari <b>toraja Travel Time</b> merupakan website yang bertujuan mengenalkan
-            pesona keindahan mulai dari Wisata dan Budaya . Tidak hanya sarana untuk memperkanalkan, <b>Travel</b>
-            juga menyediakan berbagai
-            layanan pemesanan tiket mulai tiket Tour dan tempat penginapan di sekitar </p>
-    </div>
-    <div class="about-body">
-        <div class="row slides">
-            <div class="col">
-                <img src="{{ asset('img/home/About/035-trekking.png') }}">
-                <h2>ADVENTURE</h2>
-                <p>Dapatkan pengalaman berpetualang yang belum pernah anda rasakan sebelumnya hanya di</p>
-            </div>
-            <div class="col">
-                <img src="{{ asset('img/home/About/028-book.png') }}">
-                <h2>GUIDE</h2>
-                <p>Kami memberikan info - info seputar mulai dari event dan destinasi terbaik</p>
-            </div>
-            <div class="col">
-                <img src="{{ asset('img/home/About/024-tent.png') }}">
-                <h2>STAY</h2>
-                <p>Anda tidak perlu kawatir akan menetap dimana karna kami menyediakan tiket Hotel terbaik</p>
+    <link rel="stylesheet" href="{{ asset('template/eventalk-master/css/bootstrap-datepicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('template/eventalk-master/css/jquery.timepicker.css') }}">
+
+
+    <link rel="stylesheet" href="{{ asset('template/eventalk-master/css/flaticon.css') }}">
+    <link rel="stylesheet" href="{{ asset('template/eventalk-master/css/icomoon.css') }}">
+    <link rel="stylesheet" href="{{ asset('template/eventalk-master/css/style.css') }}">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Villa<span>Resto.</span></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+                aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="oi oi-menu"></span> Menu
+            </button>
+
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active"><a href="" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="" class="nav-link">Villa</a></li>
+                    <li class="nav-item"><a href="" class="nav-link">Resto</a></li>
+                    <li class="nav-item"><a href="" class="nav-link">Contact</a></li>
+                    <li class="nav-item cta mr-md-2"><a href="{{ URL::to('/login') }}" class="nav-link">Login</a></li>
+
+                </ul>
             </div>
         </div>
-    </div>
-</section>
+    </nav>
+    <!-- END nav -->
 
-<!-- Section Explore -->
-
-<section class="section-explore">
-    <div class="texture-handler-top"></div>
-    <div class="overlay">
-        <div class="caption">
-            <h2>ENJOY BEUTY & friendliness OF</h2> <br>
-            <h1>TANA</h1>
-        </div>
-    </div>
-    <div class="texture-handler-bottom"></div>
-</section>
-
-<!-- Section Discover -->
-
-<section class="section section-discover" id="discover">
-    <div class="section-head">
-        <div class="section-line"></div>
-        <h3 class="section-title">DISCOVERY</h3>
-        <p class="section-subtitle">Adalah sebuah warisan indahnya alam dan budaya yang masih terjaga di yang
-            dapat anda jelajahi</p>
-    </div>
-    <div class="section-discover-body slides">
-        <div class="col">
-            <a href="destination.html">
-                <img src="{{ asset('img/home/toraja.jpg') }}" alt="Destination">
-                <div class="caption">
-                    <p>DESTINATION</p>
-                    <div class="line"></div>
-                    <div class="caption-text">
-                        <p>Kunjungi destinasi wisata yang belum pernah anda temui sebelumnya</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="col">
-            <a href="{{ URL::to('/kuliner') }}">
-                <img src="https://images.pexels.com/photos/2010701/pexels-photo-2010701.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1">
-                <div class="caption" alt="Culture">
-                    <p>KULINER</p>
-                    <div class="line"></div>
-                    <div class="caption-text">
-                        <p>Temukan kuliner yang mnarik dan tak terlupakan</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="col">
-            <a href="{{ URL::to('/berita') }}">
-                <img src="https://images.pexels.com/photos/518543/pexels-photo-518543.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1">
-                <div class="caption" alt="Event">
-                    <p>BERITA</p>
-                    <div class="line"></div>
-                    <div class="caption-text">
-                        <p>Ikuti dan ketahui event - event menarik yang berlangsung di</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="col">
-            <a href="{{ URL::to('/penginapan') }}">
-                <img src="{{ asset('img/home/stay.jpg') }}">
-                <div class="caption" alt="Stay">
-                    <p>PENGINAPAN</p>
-                    <div class="line"></div>
-                    <div class="caption-text">
-                        <p>Temukan tempat penginapan terbaik dengan harga yang relatif murah</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </div>
-</section>
-
-<!-- Gallery -->
-
-<section class="section section-gallery">
-    <div class="section-head">
-        <div class="section-line"></div>
-        <h3 class="section-title">OUR GALLERY</h3>
-        <p class="section-subtitle">Potret indahnya kenampakan yang tidak boleh anda lewatkan</p>
-    </div>
-    <div class="section-gallery-body">
-        <div class="row">
-            <div class="col-video">
-                <img src="https://media.istockphoto.com/photos/traditional-toraja-village-rantepao-tana-toraja-sulawesi-indonesia-picture-id1069936900?k=20&m=1069936900&s=612x612&w=0&h=8TlsbRIZ_Qn5Qs6LHaabebh7VRTtH9lurQYwQF_2my0=">
-                {{-- <video controls>
-                    <source src="{{ asset('img/home/explore.mp4') }}" type="video/mp4">
-                    Your browser does not support HTML5 video.
-                </video> --}}
-            </div>
-            <div class="col-image">
-                <div class="row">
-                    <div class="col" onclick="window.location.href='gallery.html'">
-                        <img src="https://thumbs.dreamstime.com/b/indonesia-sulawesi-tana-toraja-rice-terraces-19683539.jpg">
-                        <div class="overlay">
-                            <span class="ion-search"></span>
-                        </div>
-                    </div>
-                    <div class="col" onclick="window.location.href='gallery.html'">
-                        <img src="https://thumbs.dreamstime.com/b/toraja-22338934.jpg">
-                        <div class="overlay">
-                            <span class="ion-search"></span>
-                        </div>
-                    </div>
-                    <div class="col" onclick="window.location.href='gallery.html'">
-                        <img src="https://thumbs.dreamstime.com/b/traditional-burial-site-tana-toraja-lemo-south-sulawesi-indonesia-famous-coffins-placed-caves-carved-rock-guarded-46729291.jpg">
-                        <div class="overlay">
-                            <span class="ion-search"></span>
-                        </div>
-                    </div>
-                    <div class="col" onclick="window.location.href='gallery.html'">
-                        <img src="https://thumbs.dreamstime.com/b/coffins-16114205.jpg">
-                        <div class="overlay">
-                            <span class="ion-search"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Section Tours -->
-
-<section class="section section-tour">
-    <div class="section-head">
-        <div class="section-line"></div>
-        <h3 class="section-title">5 RECOMENDED TOURS</h3>
-        <p class="section-subtitle">Wisata terbaik berdasarkan tingkat ketertarikan wisatawan dan kepopuleran
-            wisata tersebut</p>
-    </div>
-    <div class="section-tour-body">
-        <div class="row">
-            <div class="col-1 slides">
-                <img src="{{ asset('data/gambar_destination/'.$rekomendasi1->gambar_destination) }}">
-                <div class="overlay">
-                    <div class="caption">
-                        <div class="caption-text">
-                            <p>{{ $rekomendasi1->nama_destination }}</p>
-                            <span class="fas fa-star checked"></span>
-                            <span class="fas fa-star checked"></span>
-                            <span class="fas fa-star checked"></span>
-                            <span class="fas fa-star"></span>
-                            <span class="fas fa-star"></span> <br>
-                            <span class="fas fa-rupiah-sign"></span> &nbsp;
-                            <b>{{ number_format($rekomendasi1->harga_tiket) }}</b>
-                            <a href="single-destination.html" class="btn btn-orange btn-round right">See Details</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-1 slides">
-                <img src="{{ asset('data/gambar_destination/'.$rekomendasi2->gambar_destination) }}">
-                <div class="overlay">
-                    <div class="caption">
-                        <div class="caption-text">
-                            <p>{{ $rekomendasi2->nama_destination }}</p>
-                            <span class="fas fa-star checked"></span>
-                            <span class="fas fa-star checked"></span>
-                            <span class="fas fa-star checked"></span>
-                            <span class="fas fa-star"></span>
-                            <span class="fas fa-star"></span> <br>
-                            <span class="fas fa-rupiah-sign"></span> &nbsp;
-                            <b>{{ number_format($rekomendasi2->harga_tiket) }}</b>
-                            <a href="single-destination.html" class="btn btn-orange btn-round right">See Details</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-2 slides">
-                <img src="{{ asset('data/gambar_destination/'.$rekomendasi3->gambar_destination) }}">
-                <div class="overlay">
-                    <div class="caption">
-                        <div class="caption-text">
-                            <p>{{ $rekomendasi3->nama_destination }}</p>
-                            <span class="fas fa-star checked"></span>
-                            <span class="fas fa-star checked"></span>
-                            <span class="fas fa-star checked"></span>
-                            <span class="fas fa-star"></span>
-                            <span class="fas fa-star"></span> <br>
-                            <span class="fas fa-rupiah-sign"></span> &nbsp;
-                            <b>{{ number_format($rekomendasi3->harga_tiket) }}</b>
-                            <a href="single-destination.html" class="btn btn-orange btn-round right">See Details</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-2 slides">
-                <img src="{{ asset('data/gambar_destination/'.$rekomendasi4->gambar_destination) }}">
-                <div class="overlay">
-                    <div class="caption">
-                        <div class="caption-text">
-                            <p>{{ $rekomendasi4->nama_destination }}</p>
-                            <span class="fas fa-star checked"></span>
-                            <span class="fas fa-star checked"></span>
-                            <span class="fas fa-star checked"></span>
-                            <span class="fas fa-star"></span>
-                            <span class="fas fa-star"></span> <br>
-                            <span class="fas fa-rupiah-sign"></span> &nbsp;
-                            <b>{{ number_format($rekomendasi4->harga_tiket) }}</b>
-                            <a href="single-destination.html" class="btn btn-orange btn-round right">See Details</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-2 slides">
-                <img src="{{ asset('data/gambar_destination/'.$rekomendasi5->gambar_destination) }}">
-                <div class="overlay">
-                    <div class="caption">
-                        <div class="caption-text">
-                            <p>{{ $rekomendasi5->nama_destination }}</p>
-                            <span class="fas fa-star checked"></span>
-                            <span class="fas fa-star checked"></span>
-                            <span class="fas fa-star checked"></span>
-                            <span class="fas fa-star"></span>
-                            <span class="fas fa-star"></span> <br>
-                            <span class="fas fa-rupiah-sign"></span> &nbsp;
-                            <b>{{ number_format($rekomendasi5->harga_tiket) }}</b>
-                            <a href="single-destination.html" class="btn btn-orange btn-round right">See Details</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Section Newsletter -->
-
-<section class="section-testi">
-    <div class="overlay">
-        <div class="head">
-            <h3>Tourist Says</h3>
-        </div>
-        <div id='mySwipe' class='swipe'>
-            <div class="swipe-wrap">
-                <div class="blockquote">
-                    <p class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                        ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    <div class="hero-wrap js-fullheight" style="background-image: url('img/login_img/bg1.png');"
+        data-stellar-background-ratio="0.5">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start"
+                data-scrollax-parent="true">
+                <div class="col-xl-10 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+                    <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"> cari
+                        <br><span>Penginapan ?</span>
+                    </h1>
+                    <p class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Villa and resto
                     </p>
-                    <div class="blockquote-user">
-                        <div class="blockquote-avatar">
-                            <img src="{{ asset('img/home/toraja.jpg') }}" alt="Bae Hyo-Rin">
-                        </div>
-                        <div class="blockquote-name">John Doe</div>
+                    <div id="timer">
+                        <small class="text-sm">Kami menyediakan villa dan resto untuk pengunjung ayo berkunjung sekarang
+                            juga.</small>
                     </div>
-                </div>
-                <div class="blockquote">
-                    <p class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                        ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    </p>
-                    <div class="blockquote-user">
-                        <div class="blockquote-avatar">
-                            <img src="{{ asset('img/home/toraja.jpg') }}" alt="Bae Hyo-Rin">
-                        </div>
-                        <div class="blockquote-name">Jane Doe</div>
-                    </div>
-                </div>
-                <div class="blockquote">
-                    <p class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                        ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    </p>
-                    <div class="blockquote-user">
-                        <div class="blockquote-avatar">
-                            <img src="{{ asset('img/home/toraja.jpg') }}" alt="Bae Hyo-Rin">
-                        </div>
-                        <div class="blockquote-name">John Roe</div>
-                    </div>
+                    <!-- <div id="timer" class="d-flex mb-3">
+      <div class="time" id="days"></div>
+      <div class="time pl-4" id="hours"></div>
+      <div class="time pl-4" id="minutes"></div>
+      <div class="time pl-4" id="seconds"></div>
+      </div> -->
                 </div>
             </div>
         </div>
-        <div class="overlay-btn">
-            <button class="btn-orange btn-bullet" onclick='mySwipe.prev()'><span
-                    class="fas fa-arrow-left"></span></button> &nbsp;
-            <button class="btn-orange btn-bullet" onclick='mySwipe.next()'><span
-                    class="fas fa-arrow-right"></span></button>
-        </div>
     </div>
-</section>
 
-<!-- Section News -->
 
-<section class="section section-news">
-    <div class="section-news-head">
-        <h3 class="section-title">WHAT'S HAPPENING</h3>
-        <p class="section-subtitle">Apa saja yang terjadi seputar Pariwisata, Kebudayaan dan Event di</p>
-    </div>
-    <div class="section-news-body">
-        <div class="row slides">
-            @foreach ($berita_terbaru as $row)
-            <div class="col">
-                <img src="{{ asset('data/gambar_berita/'. $row->gambar_berita) }}">
-                <div class="overlay">
-                    <a href="single-news.html">
-                        <p class="text-top"> {{ $row->judul_berita }}</p>
-                    </a>
-                    <p class="text-bottom">{{ $row->tgl_berita }}</p>
+
+
+
+    <section class="ftco-section bg-light">
+        <div class="container">
+            <div class="row justify-content-center mb-5 pb-3">
+                <div class="col-md-7 heading-section text-center ftco-animate">
+                    <span class="subheading">Villa</span>
+                    <h2><span>Kamar</span> Tersedia</h2>
                 </div>
             </div>
-            @endforeach
+            <div class="row">
+                @if (count($kamar) < 1)
+                    <div class="col-sm-12">
+                        <div class="card p-5 d-flex align-items-center">
+                            <img src="{{ asset('img/svg/ilustration/contact.svg') }}" alt="food" width="300">
+                            <p class="mt-4">Untuk saat ini tidak ada kamar kosong</p>
+                        </div>
+                    </div>
+                @endif
+                @foreach ($kamar as $row)
+                    <div class="col-lg-3">
+                        <a href="{{ URL::to('/admin/check_in/' . $row->id_kamar) }}">
+                            <div class="card my-card pt-5 pb-3 text-center">
+                                <i class="text-dark fa-regular fa-building  room-icon"></i>
+                                <h5 class="text-dark mt-4">{{ $row->nama_kamar }}</h5>
+                                <p class="text-secondary">Rp. {{ number_format($row->harga_kamar) }}</p>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
 
-@endsection
 
-@section('script')
-<script>
-    $('#liDashboard').addClass('active');
 
-</script>
-@endsection
+    <footer class="ftco-footer ftco-bg-dark ftco-section">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Villa@resto</h2>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet, voluptates.</p>
+                        <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+                            <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                            <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                            <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4 ml-md-5">
+                        <h2 class="ftco-heading-2">Useful Links</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="py-2 d-block">villa</a></li>
+                            <li><a href="#" class="py-2 d-block">resto</a></li>
+                            <li><a href="#" class="py-2 d-block"></a></li>
+                            <li><a href="#" class="py-2 d-block"></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Privacy</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="py-2 d-block">Career</a></li>
+                            <li><a href="#" class="py-2 d-block">About Us</a></li>
+                            <li><a href="#" class="py-2 d-block">Contact Us</a></li>
+                            <li><a href="#" class="py-2 d-block">Services</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Have a Questions?</h2>
+                        <div class="block-23 mb-3">
+                            <ul>
+                                <li><span class="icon icon-map-marker"></span><span class="text">Jl tamalate 1 no
+                                        10</span></li>
+                                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2
+                                            392 3929
+                                            210</span></a></li>
+                                <li><a href="#"><span class="icon icon-envelope"></span><span
+                                            class="text">info@mail.com</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+
+                    <p>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;
+                        <script>
+                            document.write(new Date().getFullYear());
+                        </script> All rights reserved | made with <i class="icon-heart color-danger"
+                            aria-hidden="true"></i> by Sam
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4"
+                stroke="#eeeeee" />
+            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4"
+                stroke-miterlimit="10" stroke="#F96D00" />
+        </svg></div>
+
+
+    <script src="{{ asset('template/eventalk-master/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('template/eventalk-master/js/jquery-migrate-3.0.1.min.js') }}"></script>
+    <script src="{{ asset('template/eventalk-master/js/popper.min.js') }}"></script>
+    <script src="{{ asset('template/eventalk-master/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('template/eventalk-master/js/jquery.easing.1.3.js') }}"></script>
+    <script src="{{ asset('template/eventalk-master/js/jquery.waypoints.min.js') }}"></script>
+    <script src="{{ asset('template/eventalk-master/js/jquery.stellar.min.js') }}"></script>
+    <script src="{{ asset('template/eventalk-master/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('template/eventalk-master/js/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset('template/eventalk-master/js/aos.js') }}"></script>
+    <script src="{{ asset('template/eventalk-master/js/jquery.animateNumber.min.js') }}"></script>
+    <script src="{{ asset('template/eventalk-master/js/bootstrap-datepicker.js') }}"></script>
+    <script src="{{ asset('template/eventalk-master/js/jquery.timepicker.min.js') }}"></script>
+    <script src="{{ asset('template/eventalk-master/js/scrollax.min.js') }}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="{{ asset('template/eventalk-master/js/google-map.js') }}"></script>
+    <script src="{{ asset('template/eventalk-master/js/main.js') }}"></script>
+
+</body>
+
+</html>

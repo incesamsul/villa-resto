@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Berita;
 use App\Models\Destination;
+use App\Models\Kamar;
 use App\Models\Komentar;
 use App\Models\Kuliner;
 use App\Models\Penginapan;
@@ -14,12 +15,7 @@ class Home extends Controller
 
     public function home()
     {
-        $data['rekomendasi1'] = Destination::first();
-        $data['rekomendasi2'] = Destination::skip(1)->first();
-        $data['rekomendasi3'] = Destination::skip(2)->first();
-        $data['rekomendasi4'] = Destination::skip(3)->first();
-        $data['rekomendasi5'] = Destination::skip(4)->first();
-        $data['berita_terbaru'] = Berita::limit(3)->latest()->get();
+        $data['kamar'] = Kamar::where('status', '1')->get();
         return view('pages.halaman_depan.index', $data);
     }
 
