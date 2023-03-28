@@ -219,6 +219,7 @@
             })
 
             $(document).on('click', '.btn-hapus-tagihan', function() {
+                alert('what');
                 let idMenu = $(this).data('id_menu');
                 let path = $(this).data('path');
                 removeItemById(idMenu);
