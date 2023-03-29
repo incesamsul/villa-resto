@@ -1,5 +1,4 @@
-<body id="loading-asset" data-asset_url="{{ asset('img/svg_animated/loading_blue_circle.svg') }}"
-    class="sidebar-mini sidebar-collapse">
+<body id="loading-asset" data-asset_url="{{ asset('img/svg_animated/loading_blue_circle.svg') }}" class="sidebar-mini ">
 
     <div id="app">
         <div class="main-wrapper">

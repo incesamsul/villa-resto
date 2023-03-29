@@ -63,6 +63,11 @@ body {
     overflow: hidden;
 }
 
+.nicescroll-rails {
+    visibility: hidden;
+}
+
+
 .menu-wrapper .img-wrapper img {
     width: 100%;
     height: 100%;

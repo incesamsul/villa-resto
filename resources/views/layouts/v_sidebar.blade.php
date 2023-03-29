@@ -1,5 +1,5 @@
 <div class="main-sidebar">
-    <aside id="sidebar-wrapper">
+    <aside id="sidebar-wrapper hide-nicescroll">
         <div class="sidebar-brand">
             <a href="index.html">Villa&Resto</a>
         </div>

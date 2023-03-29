@@ -1,7 +1,9 @@
 // MENGHILANGKAN LOADER KETIKA HALAMAN TELAH TERLOAD
 $(function () {
     $('.loader').addClass('hidden');
+
 })
+
 
 
 $('.number_format').on('input', function () {
@@ -65,6 +67,7 @@ function validateFotoDisplay(name) {
 $.fn.modal.Constructor.prototype._enforceFocus = function () { };
 
 $('.collapse-trigger-button').on('click', function (e) {
+    // $('.nicescroll-rails').css('visibility', 'visible');
     if ($('body').hasClass('sidebar-mini')) {
         $('.sidebar-menu li.menu-header').css('display', 'block');
     } else {
