@@ -10,8 +10,8 @@
                         <div class="col-sm-12 d-flex justify-content-between">
                             <h4>Kategori</h4>
                             <div class="search-element">
-                                <input class="form-control main-radius border-0" type="search" placeholder="Search"
-                                    aria-label="Search" data-width="250">
+                                <input id="search-input" class="form-control main-radius border-0" type="search"
+                                    placeholder="Search" aria-label="Search" data-width="250">
                                 <i class="text-secondary fas fa-search"></i>
                             </div>
                         </div>
@@ -125,6 +125,35 @@
             $('#btn-print-tagihan').prop('disabled', true);
             $('#btn-print-tagihan').addClass('disabled');
 
+
+            $('#search-input').on('keyup', function() {
+                let query = $(this).val();
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: '/admin/pos/cari',
+                    method: 'post',
+                    data: {
+                        query: query,
+                    },
+                    // dataType: 'json',
+                    success: function(data) {
+                        $('#menu-wrapper').html(data.html);
+                    },
+                    error: function(err) {
+                        console.log(err)
+                    },
+                    beforeSend: function() {
+                        let loadingAsset = $('#loading-asset').data('asset_url');
+                        $('#menu-wrapper').html('<img class="mt-5 pt-5 " src="' +
+                            loadingAsset +
+                            '" width="100"><p class="pt-5 pt-5 ">Loading...</p>');
+                    },
+                    complete: function() {}
+                })
+            })
+
             $(document).on('click', '.btn-kategori', function(e) {
                 e.preventDefault();
                 var $this = $(this).children();
@@ -237,7 +266,7 @@
                         .qty));
                     if (orderedList[index].qty < 1) {
                         $('#qty_' + id_menu).closest('.tagihan-menu-wrapper').remove();
-                        orderedList = orderedList.filter(item => item.id_menu !== id_menu);
+                        orderedList = orderedList.filter(item => item.id_menu != id_menu);
                         $('.pembayaran-wrapper').hide();
                         $('#btn-print-tagihan').prop('disabled', true);
                         $('#btn-print-tagihan').addClass('disabled');

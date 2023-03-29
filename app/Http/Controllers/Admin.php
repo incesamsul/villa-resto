@@ -142,6 +142,21 @@ class Admin extends Controller
         ]);
     }
 
+    public function posCari(Request $request)
+    {
+        if ($request['query'] == null || !$request['query'] || empty($request['query'])) {
+            $data['menu'] = Menu::all();
+            $data['nama_kategori'] = '';
+        } else {
+            $data['menu'] = Menu::where('nama_menu', 'like', '%' . $request['query'] . '%')->get();
+            $data['nama_kategori'] = '';
+        }
+        $html = View::make('pages.pos.kategori', $data)->render();
+        return response()->json([
+            'html' => $html,
+        ]);
+    }
+
     public function kategori($idKategori = null)
     {
         if ($idKategori) {
