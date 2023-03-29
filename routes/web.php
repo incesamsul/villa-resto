@@ -139,7 +139,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:Administrator,kasir,owner']], f
 });
 
 // OWNER ROUTE
-Route::group(['middleware' => ['auth', 'ceklevel:owner']], function () {
+Route::group(['middleware' => ['auth', 'ceklevel:Administrator,owner']], function () {
     Route::group(['prefix' => 'admin'], function () {
         // GET REQUEST
         Route::get('/kamar', [Admin::class, 'kamar']);
