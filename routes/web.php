@@ -132,6 +132,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:Administrator,kasir,owner']], f
         Route::get('/pos', [Admin::class, 'pos']);
         Route::get('/pos/kategori/{kategori}', [Admin::class, 'posKategori']);
         Route::get('/pos/cetak', [Admin::class, 'cetakPos']);
+        Route::get('/pos/cetak/{id_transaksi_pos}', [Admin::class, 'cetakPos']);
         Route::get('/transaksi_pos', [Admin::class, 'transaksiPos']);
         Route::get('/transaksi_pos/{id_transaksi_pos}', [Admin::class, 'detailTransaksiPos']);
         Route::post('/create_pos', [Admin::class, 'createPos']);

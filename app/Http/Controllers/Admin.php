@@ -104,14 +104,21 @@ class Admin extends Controller
     public function detailTransaksiPos($idTransaksiPos)
     {
         $data['transaksi'] = TagihanPos::where('id_transaksi_pos', $idTransaksiPos)->get();
+        $data['id_transaksi_pos'] = $idTransaksiPos;
         return view('pages.transaksi.detail', $data);
     }
 
-    public function cetakPos()
+    public function cetakPos($idTransaksiPos = null)
     {
-        $transaksiTerakhir = TransaksiPos::latest()->first();
-        $data['pembayaran'] = $transaksiTerakhir->pembayaran;
-        $data['tagihan'] = TagihanPos::where('id_transaksi_pos', $transaksiTerakhir->id_transaksi_pos)->get();
+        if (!$idTransaksiPos) {
+            $transaksiTerakhir = TransaksiPos::latest()->first();
+            $data['pembayaran'] = $transaksiTerakhir->pembayaran;
+            $data['tagihan'] = TagihanPos::where('id_transaksi_pos', $transaksiTerakhir->id_transaksi_pos)->get();
+        } else {
+            $transaksi = TransaksiPos::where('id_transaksi_pos', $idTransaksiPos)->first();
+            $data['pembayaran'] = $transaksi->pembayaran;
+            $data['tagihan'] = TagihanPos::where('id_transaksi_pos', $transaksi->id_transaksi_pos)->get();
+        }
         return view('pages.pos.cetak', $data);
     }
 

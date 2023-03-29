@@ -45,13 +45,7 @@
 @endsection
 @section('script')
     <script>
-        $(document).ready(function() {
-
-
-
-
-
-        });
+        $(document).ready(function() {});
 
         $('#liTransaksiPos').addClass('active');
     </script>
