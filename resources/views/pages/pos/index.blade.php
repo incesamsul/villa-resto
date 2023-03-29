@@ -222,13 +222,14 @@
                 let idMenu = $(this).data('id_menu');
                 let path = $(this).data('path');
                 removeItemById(idMenu);
-
             })
 
             function removeItemById(id_menu) {
                 let index = orderedList.findIndex(item => {
                     return item.id_menu == id_menu;
                 });
+                
+
                 if (index !== -1) {
                     orderedList[index].qty -= 1;
                     $('#qty_' + id_menu).html(orderedList[index].qty);
