@@ -228,7 +228,7 @@
                 let index = orderedList.findIndex(item => {
                     return item.id_menu == id_menu;
                 });
-                
+
 
                 if (index !== -1) {
                     orderedList[index].qty -= 1;
@@ -262,6 +262,7 @@
                     return;
                 }
 
+                let parentEl = $(this);
                 $.ajax({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -284,7 +285,9 @@
                     error: function(err) {
                         console.log(err)
                     },
-                    beforeSend: function() {},
+                    beforeSend: function() {
+                        parentEl.html('<i class="fas fa-circle-notch fa-spin"></i> Loading');
+                    },
                     complete: function() {}
                 })
             })
