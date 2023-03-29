@@ -109,7 +109,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:Administrator']], function () {
 
 
 // RESEPSIONIS ROUTE
-Route::group(['middleware' => ['auth', 'ceklevel:resepsionis']], function () {
+Route::group(['middleware' => ['auth', 'ceklevel:Administrator,resepsionis']], function () {
     Route::group(['prefix' => 'admin'], function () {
         // GET REQUEST
 
