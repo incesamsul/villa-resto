@@ -53,8 +53,8 @@ function convertNoHp($noHp)
 function sendWhatsAppMessage($wa, $pesan)
 {
     $_wa = convertNoHp($wa);
-    $account_sid = 'AC80c49cc0f6ee0b7b01a332c886df472a';
-    $auth_token = '4e1a8dd7efdaccf38ee53a9d71f3ad07';
+    $account_sid = env('TWILLIO_SID');
+    $auth_token = env('TWILLIO_TOKEN');
     $twilio_whatsapp_number = 'whatsapp:+14155238886';
 
     $client = new Client($account_sid, $auth_token);
