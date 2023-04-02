@@ -6,7 +6,7 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Kamar tersedia</h4>
+                        <h4>kamar Tersedia</h4>
                     </div>
                 </div>
             </div>
@@ -40,11 +40,13 @@
                         <h4>Data Tamu check in</h4>
                     </div>
                     <div class="card-body">
-                        <table class="table table-striped table-hover table-user table-action-hover" id="table-data">
+                        <table class="table table-striped table-hover table-user table-action-hover table-data">
                             <thead>
                                 <tr>
                                     <th>#</th>
                                     <td>Nama Tamu</td>
+                                    <td>No. Identitas</td>
+                                    <td>Jumlah Tamu</td>
                                     <td>Kamar</td>
                                     <td>Jam check in</td>
                                     <td>Tgl check in</td>
@@ -55,6 +57,8 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $row->tamu->nama_tamu }}</td>
+                                        <td>{{ $row->tamu->nomor_identitas }}</td>
+                                        <td>{{ $row->jumlah_tamu }}</td>
                                         <td>{{ $row->kamar->nama_kamar }}</td>
                                         <td>{{ $row->jam_check_in }}</td>
                                         <td>{{ $row->tgl_check_in }}</td>
@@ -67,6 +71,81 @@
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Data Reservasi</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped table-hover table-user table-action-hover table-data">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <td>Nama Tamu</td>
+                                    <td>No. Identitas</td>
+                                    <td>Jumlah Tamu</td>
+                                    <td>Kamar</td>
+                                    <td>Tgl check in</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($reservasi as $row)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $row->tamu->nama_tamu }}</td>
+                                        <td>{{ $row->tamu->nomor_identitas }}</td>
+                                        <td>{{ $row->jumlah_tamu }}</td>
+                                        <td>{{ $row->kamar->nama_kamar }}</td>
+                                        <td>{{ $row->tgl_check_in }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Histori Reservasi</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped table-hover table-user table-action-hover table-data">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <td>Nama Tamu</td>
+                                    <td>No. Identitas</td>
+                                    <td>Jumlah Tamu</td>
+                                    <td>Kamar</td>
+                                    <td>Tgl check in</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($history_reservasi as $row)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $row->tamu->nama_tamu }}</td>
+                                        <td>{{ $row->tamu->nomor_identitas }}</td>
+                                        <td>{{ $row->jumlah_tamu }}</td>
+                                        <td>{{ $row->kamar->nama_kamar }}</td>
+                                        <td>{{ $row->tgl_check_in }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
     </section>
 @endsection
 @section('script')

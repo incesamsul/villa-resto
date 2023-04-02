@@ -12,13 +12,8 @@ class CheckOut extends Model
     protected $table = 'check_out';
     protected $guarded = ['id_check_out'];
 
-    public function kamar()
+    public function checkIn()
     {
-        return $this->belongsTo(Kamar::class, 'id_kamar', 'id_kamar');
-    }
-
-    public function tamu()
-    {
-        return $this->belongsTo(Tamu::class, 'id_tamu', 'id_tamu');
+        return $this->belongsTo(CheckIn::class, 'id_check_in', 'id_check_in');
     }
 }

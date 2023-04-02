@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Barang;
 use App\Models\Berita;
 use App\Models\CheckIn;
 use App\Models\CheckOut;
 use App\Models\Destination;
+use App\Models\Inventaris;
 use App\Models\Kamar;
 use App\Models\Kategori;
 use App\Models\Kuliner;
 use App\Models\Menu;
 use App\Models\Penginapan;
+use App\Models\Reservasi;
+use App\Models\Satuan;
 use App\Models\TagihanPos;
 use App\Models\Tamu;
 use App\Models\TransaksiPos;
@@ -65,6 +69,9 @@ class Admin extends Controller
     public function checkIn($idKamar = null)
     {
         $data['tamu'] = CheckIn::all();
+        $today = \Carbon\Carbon::today();
+        $data['history_reservasi'] = Reservasi::whereDate('tgl_check_in', '<=', $today)->get();
+        $data['reservasi'] = Reservasi::whereDate('tgl_check_in', '>=', $today)->get();
         if ($idKamar) {
             $data['id_kamar'] = $idKamar;
             $data['kamar'] = Kamar::where('id_kamar', $idKamar)->first();
@@ -72,6 +79,22 @@ class Admin extends Controller
                 return redirect('/admin/check_in');
             }
             return view('pages.kamar.proses_cek_in', $data);
+        } else {
+            $data['kamar'] = Kamar::where('status', '1')->get();
+            return view('pages.kamar.check_in', $data);
+        }
+    }
+
+    public function reservasi($idKamar = null)
+    {
+        $data['tamu'] = CheckIn::all();
+        if ($idKamar) {
+            $data['id_kamar'] = $idKamar;
+            $data['kamar'] = Kamar::where('id_kamar', $idKamar)->first();
+            if ($data['kamar']->status == '0') {
+                return redirect('/admin/check_in');
+            }
+            return view('pages.kamar.proses_reservasi', $data);
         } else {
             $data['kamar'] = Kamar::where('status', '1')->get();
             return view('pages.kamar.check_in', $data);
@@ -180,6 +203,12 @@ class Admin extends Controller
         return view('pages.menu.index', $data);
     }
 
+    public function inventaris()
+    {
+        $data['kamar'] = Kamar::all();
+        return view('pages.kamar.inventaris', $data);
+    }
+
     public function profileUser()
     {
         $data['user'] = User::all();
@@ -206,6 +235,20 @@ class Admin extends Controller
         return 1;
     }
 
+    // fetch data pembelian
+    function fetchDataPembelian(Request $request)
+    {
+        if ($request->ajax()) {
+            $query = $request->get('query');
+            $query = str_replace(" ", "%", $query);
+
+            $data['pembelian'] = Barang::Where('nama_barang', 'like', '%' . $query . '%')
+                ->orWhere('barcode', 'like', '%' . $query . '%')
+                ->paginate(10);
+
+            return view('pages.pembelian.data_pembelian', $data)->render();
+        }
+    }
 
 
     // fetch data user by admin
@@ -239,18 +282,17 @@ class Admin extends Controller
 
     // CEK OUT
 
-    public function createCheckOut($id_kamar)
+    public function createCheckOut($id_check_in)
     {
-        $checkIn = CheckIn::where('id_kamar', $id_kamar)->first();
-        $tamu = $checkIn ? $checkIn->id_tamu : 0;
+        $checkIn = CheckIn::where('id_check_in', $id_check_in)->first();
+        $idKamar = $checkIn ? $checkIn->id_kamar : 0;
         CheckOut::create([
-            'id_kamar' => $id_kamar,
+            'id_check_in' => $id_check_in,
             'tgl_check_out' => Carbon::now(),
             'jam_check_out' => getHour(),
-            'id_tamu' => $tamu
         ]);
 
-        Kamar::where('id_kamar', $id_kamar)->update([
+        Kamar::where('id_kamar', $idKamar)->update([
             'status' => '1'
         ]);
 
@@ -263,12 +305,14 @@ class Admin extends Controller
     {
         $tamu = Tamu::create([
             'nama_tamu' => $request->nama_tamu,
+            'nomor_identitas' => $request->nomor_identitas,
         ])->id;
 
         CheckIn::create([
             'id_kamar' => $request->id_kamar,
             'tgl_check_in' => Carbon::now(),
             'jam_check_in' => getHour(),
+            'jumlah_tamu' => $request->jumlah_tamu,
             'id_tamu' => $tamu
         ]);
 
@@ -278,6 +322,61 @@ class Admin extends Controller
 
         return redirect('/admin/check_in')->with('message', 'data terimpan');
     }
+
+    public function createReservasi(Request $request)
+    {
+        $tamu = Tamu::create([
+            'nama_tamu' => $request->nama_tamu,
+            'nomor_identitas' => $request->nomor_identitas,
+        ])->id;
+
+        Reservasi::create([
+            'id_kamar' => $request->id_kamar,
+            'tgl_check_in' => $request->tgl_check_in,
+            'jumlah_tamu' => $request->jumlah_tamu,
+            'booking_fee' => removeComa($request->booking_fee),
+            'id_tamu' => $tamu
+        ]);
+
+        return redirect('/admin/check_in')->with('message', 'data terimpan');
+    }
+    // CRUD INVENTARIS
+
+    public function getInventarisKamar($idKamar)
+    {
+        return Inventaris::where('id_kamar', $idKamar)->get();
+    }
+
+    public function createInventaris(Request $request)
+    {
+
+        Inventaris::create([
+            'id_kamar' => $request->id_kamar,
+            'nama_inventaris' => $request->nama_inventaris,
+        ]);
+
+        $inventaris = Inventaris::latest()->first();
+
+        return response()->json($inventaris);
+    }
+
+    public function updateInventaris(Request $request)
+    {
+
+        $inventaris = Inventaris::where('id_inventaris', $request->id_inventaris)->update([
+            'id_kamar' => $request->id_kamar,
+            'nama_inventaris' => $request->nama_inventaris,
+        ]);
+
+        return response()->json($inventaris);
+    }
+
+    public function deleteInventaris(Request $request)
+    {
+        $inventaris = Inventaris::where('id_inventaris', $request->id_inventaris)->delete();
+        return 1;
+    }
+
 
     // CRUD MENU
     public function tambahMenu(Request $request)
@@ -661,6 +760,104 @@ class Admin extends Controller
     public function deletePengguna(Request $request)
     {
         User::destroy($request->post('user_id'));
+        return 1;
+    }
+
+    // CRUD PEMBELIAN
+
+    public function pembelian()
+    {
+        $data['satuan'] = Satuan::all();
+        $data['pembelian'] = Barang::paginate(10);
+        return view('pages.pembelian.index', $data);
+    }
+
+    public function createPembelian(Request $request)
+    {
+        $box = $request->all();
+        $formData =  [];
+        parse_str($box['formData'], $formData);
+        $barang = Barang::where('kode_barang', $formData['kode_barang']);
+        if (!$barang->first()) {
+            Barang::create([
+                'kode_barang' => $formData['kode_barang'],
+                'kode_satuan' => $formData['satuan'],
+                'tgl_masuk' => $formData['tgl_masuk'],
+                'nama_barang' => $formData['nama_barang'],
+                'barcode' => $formData['barcode'],
+                'harga_beli' => $formData['harga_beli'],
+                'harga_jual' => $formData['harga_jual'],
+                'stok' => $formData['stok'],
+            ]);
+            return 1;
+        } else {
+            $barang->update([
+                'kode_barang' => $formData['kode_barang'],
+                'kode_satuan' => $formData['satuan'],
+                'tgl_masuk' => $formData['tgl_masuk'],
+                'nama_barang' => $formData['nama_barang'],
+                'barcode' => $formData['barcode'],
+                'harga_beli' => $formData['harga_beli'],
+                'harga_jual' => $formData['harga_jual'],
+                'stok' => $formData['stok'],
+            ]);
+            return 2;
+        }
+    }
+
+    public function updatePembelian(Request $request)
+    {
+        $user = Satuan::where([
+            ['kode_satuan', '=', $request->id]
+        ])->update([
+            'kode_satuan' => $request->kode_satuan,
+            'nama_satuan' => $request->nama_satuan,
+        ]);
+        return redirect()->back()->with('message', 'pelanggan Berhasil di update');
+    }
+
+    public function deletePembelian(Request $request)
+    {
+        Barang::where([
+            ['kode_barang', '=', $request->kode_barang]
+        ])->delete();
+        return 1;
+    }
+
+
+    // CRUD SATUAN
+
+    public function satuan()
+    {
+        $data['satuan'] = Satuan::all();
+        return view('pages.satuan.index', $data);
+    }
+
+    public function createSatuan(Request $request)
+    {
+        Satuan::create([
+            'kode_satuan' => $request->kode_satuan,
+            'nama_satuan' => $request->nama_satuan,
+        ]);
+        return redirect()->back()->with('message', 'pelanggan Berhasil di tambahkan');
+    }
+
+    public function updateSatuan(Request $request)
+    {
+        $user = Satuan::where([
+            ['kode_satuan', '=', $request->id]
+        ])->update([
+            'kode_satuan' => $request->kode_satuan,
+            'nama_satuan' => $request->nama_satuan,
+        ]);
+        return redirect()->back()->with('message', 'pelanggan Berhasil di update');
+    }
+
+    public function deleteSatuan(Request $request)
+    {
+        Satuan::where([
+            ['kode_satuan', '=', $request->kode_satuan]
+        ])->delete();
         return 1;
     }
 }

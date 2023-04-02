@@ -35,6 +35,7 @@
 <script src="{{ asset('stisla/assets/js/scripts.js') }}"></script>
 <script src="{{ asset('stisla/assets/js/custom.js') }}"></script>
 
+<script src="{{ asset('js/multistep.js') }}"></script>
 <!-- Page Specific JS File -->
 
 

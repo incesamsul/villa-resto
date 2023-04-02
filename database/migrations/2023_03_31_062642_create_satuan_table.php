@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTamuTable extends Migration
+class CreateSatuanTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateTamuTable extends Migration
      */
     public function up()
     {
-        Schema::create('tamu', function (Blueprint $table) {
-            $table->increments('id_tamu');
-            $table->string('nomor_identitas')->nullable();
-            $table->string('nama_tamu');
+        Schema::create('satuan', function (Blueprint $table) {
+            $table->string('kode_satuan', 50)->primary();
+            $table->string('nama_satuan', 70);
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreateTamuTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tamu');
+        Schema::dropIfExists('satuan');
     }
 }

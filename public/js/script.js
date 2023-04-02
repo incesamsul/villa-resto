@@ -144,6 +144,16 @@ let dataTable = $('#table-data').DataTable({
     "lengthChange": false,
     "responsive": true
 });
+
+let dataTables = $('.table-data').DataTable({
+    "lengthChange": false,
+    "responsive": true
+});
+
 $("#searchbox").on("keyup search input paste cut", function () {
     dataTable.search(this.value).draw();
+});
+
+$(".searchbox").on("keyup search input paste cut", function () {
+    dataTables.search(this.value).draw();
 });

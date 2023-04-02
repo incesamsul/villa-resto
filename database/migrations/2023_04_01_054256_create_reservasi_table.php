@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCheckInTable extends Migration
+class CreateReservasiTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateCheckInTable extends Migration
      */
     public function up()
     {
-        Schema::create('check_in', function (Blueprint $table) {
-            $table->increments('id_check_in');
+        Schema::create('reservasi', function (Blueprint $table) {
+            $table->increments('id_reservasi');
             $table->date('tgl_check_in');
-            $table->time('jam_check_in');
             $table->integer('jumlah_tamu');
-            $table->integer('panjar');
+            $table->integer('booking_fee');
             $table->unsignedInteger('id_kamar');
             $table->unsignedInteger('id_tamu');
             $table->timestamps();
@@ -34,6 +33,6 @@ class CreateCheckInTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('check_in');
+        Schema::dropIfExists('reservasi');
     }
 }

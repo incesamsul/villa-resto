@@ -70,6 +70,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:Administrator']], function () {
         // GET REQUEST
         Route::get('/pengguna', [Admin::class, 'pengguna']);
         Route::get('/fetch_data', [Admin::class, 'fetchData']);
+        Route::get('/fetch_data_pembelian', [Admin::class, 'fetchDataPembelian']);
         Route::get('/kamar', [Admin::class, 'kamar']);
         Route::get('/check_in', [Admin::class, 'checkIn']);
         Route::get('/check_in/{id_kamar}', [Admin::class, 'checkIn']);
@@ -82,6 +83,25 @@ Route::group(['middleware' => ['auth', 'ceklevel:Administrator']], function () {
         Route::get('/kategori/{id_kategori}', [Admin::class, 'kategori']);
         Route::get('/menu', [Admin::class, 'menu']);
         Route::get('/menu/{id_menu}', [Admin::class, 'menu']);
+        Route::get('/get_inventaris_kamar/{id_kamar}', [Admin::class, 'getInventarisKamar']);
+
+        // CRUD INVENTARIS
+        Route::get('/inventaris', [Admin::class, 'inventaris']);
+        Route::post('/create_inventaris', [Admin::class, 'createInventaris']);
+        Route::post('/update_inventaris', [Admin::class, 'updateInventaris']);
+        Route::post('/delete_inventaris', [Admin::class, 'deleteInventaris']);
+
+        // CRUD SATUAN
+        Route::get('/satuan', [Admin::class, 'satuan']);
+        Route::post('/create_satuan', [Admin::class, 'createSatuan']);
+        Route::post('/update_satuan', [Admin::class, 'updateSatuan']);
+        Route::post('/delete_satuan', [Admin::class, 'deleteSatuan']);
+
+        // CRUD PEMBELIAN
+        Route::get('/pembelian', [Admin::class, 'pembelian']);
+        Route::post('/create_pembelian', [Admin::class, 'createPembelian']);
+        Route::post('/update_pembelian', [Admin::class, 'updatePembelian']);
+        Route::post('/delete_pembelian', [Admin::class, 'deletePembelian']);
 
         // CRUD MENU
         Route::post('/tambah_menu', [Admin::class, 'tambahMenu']);
@@ -116,11 +136,15 @@ Route::group(['middleware' => ['auth', 'ceklevel:Administrator,resepsionis']], f
 
         Route::get('/check_in', [Admin::class, 'checkIn']);
         Route::get('/check_in/{id_kamar}', [Admin::class, 'checkIn']);
+        Route::get('/reservasi/{id_kamar}', [Admin::class, 'reservasi']);
         Route::get('/check_out', [Admin::class, 'checkOut']);
-        Route::get('/check_out/{id_kamar}', [Admin::class, 'createCheckOut']);
+        Route::get('/check_out/{id_check_in}', [Admin::class, 'createCheckOut']);
 
         // CRUD CEK IN
         Route::post('/create_check_in', [Admin::class, 'createCheckIn']);
+
+        // CRUD RESERVASI
+        Route::post('/create_reservasi', [Admin::class, 'createReservasi']);
     });
 });
 

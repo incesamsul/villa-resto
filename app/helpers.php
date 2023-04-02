@@ -1,16 +1,49 @@
 <?php
 
-use App\Models\FavoritModel;
-use App\Models\KategoriModel;
-use App\Models\LogAktivitasModel;
+use App\Models\Inventaris;
+use App\Models\Reservasi;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\URL;
-use phpDocumentor\Reflection\Types\Null_;
-use PhpParser\Node\Expr\FuncCall;
 use Twilio\Rest\Client;
 
-use function PHPUnit\Framework\isNull;
+
+
+
+function cekReservasiKamar($idKamar)
+{
+    $tglHariIni = Carbon::now()->format('Y-m-d');
+
+    $reservasi = Reservasi::where('id_kamar', $idKamar)->latest()->first();
+    if ($reservasi) {
+        // Check if the reservation date has passed today's date
+        if (strtotime($reservasi->tgl_check_in) < strtotime($tglHariIni)) {
+            // reservasi invalid
+            return;
+        } else {
+            // reservasi valid
+            return $reservasi;
+        }
+    }
+}
+
+function hitungDurasiMalam($checkin, $checkout)
+{
+    $checkin_date = Carbon::parse($checkin);
+    $checkout_date = Carbon::parse($checkout);
+
+    // Jika check-in dan check-out pada hari yang sama, hitung sebagai 1 hari
+    if ($checkin_date->isSameDay($checkout_date)) {
+        return 1;
+    }
+
+    // Jika check-out sebelum jam 12 siang, hitung sebagai 1 malam
+    if ($checkout_date->diffInHours($checkout_date->copy()->startOfDay()->addHours(12)) < 0) {
+        return $checkin_date->diffInDays($checkout_date);
+    }
+
+    // Jika check-out setelah jam 12 siang, hitung sebagai 2 malam
+    return $checkin_date->diffInDays($checkout_date->addDay());
+}
 
 function convertNoHp($noHp)
 {
@@ -51,6 +84,11 @@ function getHour()
 function spaceToLine($string)
 {
     return str_replace(" ", "-", $string);
+}
+
+function removeComa($string)
+{
+    return str_replace(",", "", $string);
 }
 
 function lineToSpace($string)

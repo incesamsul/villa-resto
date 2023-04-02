@@ -17,11 +17,9 @@ class CreateCheckOutTable extends Migration
             $table->increments('id_check_out');
             $table->date('tgl_check_out');
             $table->time('jam_check_out');
-            $table->unsignedInteger('id_kamar');
-            $table->unsignedInteger('id_tamu');
+            $table->unsignedInteger('id_check_in');
             $table->timestamps();
-            $table->foreign('id_kamar')->references('id_kamar')->on('kamar')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('id_tamu')->references('id_tamu')->on('tamu')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_check_in')->references('id_check_in')->on('check_in')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

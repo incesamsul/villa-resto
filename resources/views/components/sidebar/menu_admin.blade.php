@@ -22,3 +22,27 @@
         <span>Kategori</span>
     </a>
 </li>
+
+
+<li class="nav-item dropdown " id="liDataBarang">
+    <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+        <i class="fa-regular fa-hard-drive"></i>
+        <span>Stok opname</span></a>
+    <ul class="dropdown-menu">
+        <li id="liPembelian"><a class="nav-link" href="/admin/pembelian">Belanja</a></li>
+    </ul>
+</li>
+
+<li class="" id="liSatuan" data-toggle="tooltip" title="Satuan" data-placement="right">
+    <a class="nav-link" href="{{ URL::to('/admin/satuan') }}">
+        <i class="fa-regular fa-hand-spock"></i>
+        <span>Satuan</span>
+    </a>
+</li>
+
+<li class="" id="liInventaris" data-toggle="tooltip" title="Inventaris" data-placement="right">
+    <a class="nav-link" href="{{ URL::to('/admin/inventaris') }}">
+        <i class="fa-regular fa-rectangle-list"></i>
+        <span>Inventaris</span>
+    </a>
+</li>

@@ -46,18 +46,31 @@
                                     <th>#</th>
                                     <td>Nama Tamu</td>
                                     <td>Kamar</td>
-                                    <td>Jam check out</td>
-                                    <td>Tgl check out</td>
+                                    <td>Tgl check in</td>
+                                    <td>Jam check in</td>
+                                    <td>tgl check out</td>
+                                    <td>jam check out</td>
+                                    <td>Lama menginap</td>
+                                    <td>Tagihan</td>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($tamu as $row)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $row->tamu->nama_tamu }}</td>
-                                        <td>{{ $row->kamar->nama_kamar }}</td>
-                                        <td>{{ $row->jam_check_out }}</td>
+                                        <td>{{ $row->checkIn->tamu->nama_tamu }}</td>
+                                        <td>{{ $row->checkIn->kamar->nama_kamar }}</td>
+                                        <td>{{ $row->checkIn->tgl_check_in }}</td>
+                                        <td>{{ $row->checkIn->jam_check_in }}</td>
                                         <td>{{ $row->tgl_check_out }}</td>
+                                        <td>{{ $row->jam_check_out }}</td>
+                                        <td>
+                                            {{ hitungDurasiMalam($row->checkIn->tgl_check_in, $row->tgl_check_out) }} Hari
+                                        </td>
+                                        <td>
+                                            Rp.
+                                            {{ number_format(hitungDurasiMalam($row->checkIn->tgl_check_in, $row->tgl_check_out) * $row->checkIn->kamar->harga_kamar) }}
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

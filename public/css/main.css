@@ -67,6 +67,9 @@ body {
     visibility: hidden;
 }
 
+.cursor-pointer {
+    cursor: pointer;
+}
 
 .menu-wrapper .img-wrapper img {
     width: 100%;
