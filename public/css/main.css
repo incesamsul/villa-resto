@@ -87,6 +87,10 @@ body {
     overflow-y: auto;
 }
 
+.text-lg {
+    font-size: 70px !important;
+}
+
 .fixed-element {
     position: fixed !important;
     /* right: 0; */

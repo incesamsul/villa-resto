@@ -100,6 +100,10 @@
                 },
                 url: '/admin/get_inventaris_kamar/' + idKamar,
                 dataType: 'json',
+                beforeSend: function() {
+                    $('.list-inventaris-' + idKamar).html(
+                        '<i class="text-lg text-second fas fa-circle-notch fa-spin"></i> ');
+                },
                 success: function(response) {
                     console.log(response)
                     if (response) {
